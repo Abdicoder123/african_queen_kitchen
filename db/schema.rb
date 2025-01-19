@@ -10,9 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_01_17_164226) do
+ActiveRecord::Schema[7.2].define(version: 2025_01_18_004846) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "invoices", force: :cascade do |t|
+    t.bigint "order_id"
+    t.date "invoice_date"
+    t.date "due_date"
+    t.decimal "total_amount"
+    t.string "invoice_status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["order_id"], name: "index_invoices_on_order_id"
+  end
 
   create_table "menus", force: :cascade do |t|
     t.string "title"
