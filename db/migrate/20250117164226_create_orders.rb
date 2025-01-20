@@ -6,7 +6,7 @@ class CreateOrders < ActiveRecord::Migration[7.2]
       t.string :status
       t.text :event_details
       t.integer :group_size
-      t.integer :total_cost
+      t.decimal :total_cost
 
       t.timestamps
     end
