@@ -12,7 +12,7 @@ class OrdersController < ApplicationController
   end
 
 
-  private 
+  private
 
   def order_params
     params.require(:order).permit(:delivery_date, :status, :event_details, :group_size, :total_cost)
