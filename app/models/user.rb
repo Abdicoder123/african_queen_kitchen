@@ -7,7 +7,7 @@ class User < ApplicationRecord
 
   # Callbacks to handle creating and deleting Stripe customers
   after_create :create_stripe_customer
-  after_sign_in :create_stripe_customer
+  after_save :create_stripe_customer
   before_destroy :delete_stripe_customer
 
 
