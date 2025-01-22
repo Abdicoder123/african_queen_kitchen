@@ -1,15 +1,19 @@
 class OrdersController < ApplicationController
+  before_action :authenticate_user!
   def index
     @orders = Order.all
   end
   
+  def show
+    @order = Order.find(params[:id])
+  end
+
   def new
     @order = Order.new 
   end
 
   def create
-    puts "Entered the create method"
-    @order = Order.new(order_params)
+    @order = current_user.orders.new(order_params)
 
     respond_to do |format|
       if @order.save
