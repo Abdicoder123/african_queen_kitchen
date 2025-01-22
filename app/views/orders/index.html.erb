@@ -1,4 +1,10 @@
-<h1>Make an Inquiry!</h1>
+<h1>Order History</h1>
 
-<%= render 'orders/form' %>
+<div> 
+    <% @orders.each do |order| %>
+        <%= render order %>
+        <p><%= link_to "Show this order", order%></p>
+    <% end %> 
+</div>
 
+<p><%= link_to "New Order", new_order_path %></p>

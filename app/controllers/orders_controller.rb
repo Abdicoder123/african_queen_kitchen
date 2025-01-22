@@ -1,7 +1,28 @@
 class OrdersController < ApplicationController
   def index
+    @orders = Order.all
+  end
+  
+  def new
+    @order = Order.new 
   end
 
+  def create
+    puts "Entered the create method"
+    @order = Order.new(order_params)
+
+    respond_to do |format|
+      if @order.save
+        format.html { redirect_to orders_path, notice: "Order was successfully created." }
+        format.json { render :show, status: :created, location: @order }
+      else
+        puts @order.errors.full_messages
+        format.html { render :new, status: :unprocessable_entity }
+        format.json { render json: @order.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+  
 
   private
 

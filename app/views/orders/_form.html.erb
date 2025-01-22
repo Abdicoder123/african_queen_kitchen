@@ -15,22 +15,6 @@
       <%= form.number_field :group_size, min: 1 %>
     </div>
   
-    <div>
-      <%= form.label :total_cost, "Total Cost" %>
-      <%= form.number_field :total_cost, step: 0.01, readonly: true %> <!-- Calculated field -->
-    </div>
-  
-
-    <div id="order-dish-container">
-      <%= form.fields_for :order_dishes do |item_form| %>
-        <h3>Add a Dish!</h3>
-        <%= render 'order_dishes/form', f: item_form %>
-      <% end %>
-    </div>
-  
-    <div>
-      <%= link_to "Add Item", '#', id: "add-order-dish", class: "button" %>
-    </div>
   
     <div>
       <%= form.submit "Save Order" %>
