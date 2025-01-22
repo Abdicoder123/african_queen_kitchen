@@ -1,17 +1,10 @@
+<h1>Order Page</h1>
 <%= render @order %>
 
 <h2>Dishes in this Order</h2>
+<%= render 'dish' %>
 
-<div>
-  <% @order_dishes.each do |dish| %>
-    <li>
-      Dish name: <%= dish.dish.title %>
-    </li>
-    <li>
-      Quantity: <%= dish.quantity %>
-    </li>
-    <li>
-      Total price: <%= dish.price %>
-    </li>
-  <% end %>
-</div>
+<% if @order.status === 'Order Creation' %>
+    <%= render 'order_dishes/form', order: @order %>
+<% end %>
+

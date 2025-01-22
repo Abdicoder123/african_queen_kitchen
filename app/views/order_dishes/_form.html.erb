@@ -1,15 +1,27 @@
-<div>
-    <h3>Add a dish!</h3>
-    <%= form.fields_for :order_dishes do |od_form| %>
-      <div>
-        <%= od_form.label :dish_id, "Dish" %>
-        <%= od_form.collection_select(:dish_id, Dish.all, :id, :title) %>
-      </div>
-      <div>
-        <%= od_form.label :quantity %>
-        <%= od_form.number_field :quantity, min: 1 %>
-      </div>
+<%= form_with model: [order, order.order_dishes.build] do |form| %>
+  <% if form.object.errors.any? %>
+    <div class="alert alert-danger" role="alert">
+      <h4><%= pluralize(form.object.errors.count, "error") %> prohibited this comment from being saved:</h4>
+      <ul>
+        <% form.object.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
 
-      <%= form.submit "Add Dish" %>
-    <% end %>
-  </div>
+
+<div>
+  <%= form.label :dish_id, "Dish" %>
+  <%= form.collection_select(:dish_id, Dish.all, :id, :title) %>
+</div>
+<div>
+  <%= form.label :quantity %>
+  <%= form.number_field :quantity, min: 1 %>
+</div>
+
+<div class="mb-3">
+    <%= form.submit "Add a Dish" %>
+</div>
+
+<% end %>

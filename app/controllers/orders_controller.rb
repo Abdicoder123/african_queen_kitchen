@@ -13,7 +13,6 @@ class OrdersController < ApplicationController
 
   def new
     @order = Order.new 
-    @order.order_dishes.build 
   end
 
   def create
@@ -25,7 +24,8 @@ class OrdersController < ApplicationController
         format.json { render :show, status: :created, location: @order }
       else
         # Log error messages for debugging
-        format.html { render :new, status: :unprocessable_entity }
+        flash.now[:alert] = @order.errors.full_messages.join(", ")
+        format.html { render :new, status: :unprocessable_entity, notice: "Fill the form completey"}
         format.json { render json: @order.errors, status: :unprocessable_entity }
       end
     end
@@ -36,6 +36,6 @@ class OrdersController < ApplicationController
   private
 
   def order_params
-    params.require(:order).permit(:delivery_date, :status, :event_details, :group_size, :total_cost, order_dishes_attributes: [:dish_id, :quantity, :total_price, :_destroy])
+    params.require(:order).permit(:delivery_date, :status, :event_details, :group_size, :total_cost)
   end
 end

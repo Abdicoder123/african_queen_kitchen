@@ -9,6 +9,7 @@
 #   end
 
 puts "Seeding database"
+AdminUser.destroy_all
 Menu.destroy_all
 Dish.destroy_all
 Order.destroy_all

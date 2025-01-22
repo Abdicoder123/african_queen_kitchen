@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
-  resources :orders
+  resources :orders do
+    resources :order_dishes
+  end
   resources :payments
   resources :invoices
   resources :menus
