@@ -1,5 +1,5 @@
 ActiveAdmin.register Menu do
-  permit_params :title, :description
+  permit_params :title, :description, :category, :active, :special_notes
 
   index do
     selectable_column
