@@ -1,16 +1,29 @@
-<h2>Forgot your password?</h2>
+<div class="container my-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card shadow-lg">
+        <div class="card-header text-center" style="background-color: #4b0082; color: #ffd700;">
+          <h2 class="mb-0">Forgot Your Password?</h2>
+        </div>
+        <div class="card-body">
+          <p class="text-center text-muted">Enter your email address below, and we'll send you instructions to reset your password.</p>
+          <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post, class: "needs-validation" }) do |f| %>
+            <%= render "devise/shared/error_messages", resource: resource %>
 
-<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
+            <div class="mb-3">
+              <%= f.label :email, "Email Address", class: "form-label" %>
+              <%= f.email_field :email, class: "form-control", autofocus: true, autocomplete: "email" %>
+            </div>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+            <div class="d-grid gap-2">
+              <%= f.submit "Send Reset Instructions", class: "btn btn-warning text-dark fw-bold" %>
+            </div>
+          <% end %>
+        </div>
+        <div class="card-footer text-center">
+          <%= link_to "Back to Log In", new_session_path(resource_name), class: "btn btn-outline-secondary btn-sm" %>
+        </div>
+      </div>
+    </div>
   </div>
-
-  <div class="actions">
-    <%= f.submit "Send me reset password instructions" %>
-  </div>
-<% end %>
-
-<%= render "devise/shared/links" %>
+</div>
