@@ -1,0 +1,20 @@
+<div class="order-item-fields">
+  <div>
+    <%= f.label :dish_id, "Dish" %>
+    <%= f.collection_select :dish_id, Dish.all, :id, :name, prompt: "Select Dish" %>
+  </div>
+
+  <div>
+    <%= f.label :quantity %>
+    <%= f.number_field :quantity, value: 1, min: 1 %>
+  </div>
+
+  <div>
+    <%= f.label :total_price %>
+    <%= f.number_field :total_price, step: 0.01, readonly: true %> <!-- Automatically calculated -->
+  </div>
+
+  <div>
+    <%= link_to "Remove Item", '#', class: "remove-order-item button" %>
+  </div>
+</div>

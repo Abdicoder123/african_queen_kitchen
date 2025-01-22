@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_01_21_165559) do
+ActiveRecord::Schema[7.2].define(version: 2025_01_21_174923) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -63,7 +63,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_01_21_165559) do
     t.string "status"
     t.text "event_details"
     t.integer "group_size"
-    t.decimal "total_cost"
+    t.integer "total_cost"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_orders_on_user_id"
@@ -99,6 +99,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_01_21_165559) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "stripe_customer_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
