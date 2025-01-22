@@ -1,3 +1,9 @@
+<% if flash.now[:alert] %>
+  <div class="alert alert-danger">
+    <%= flash.now[:alert] %>
+  </div>
+<% end %>
+
 <%= form_with model: [order, order.order_dishes.build] do |form| %>
   <% if form.object.errors.any? %>
     <div class="alert alert-danger" role="alert">
@@ -9,8 +15,7 @@
       </ul>
     </div>
   <% end %>
-
-
+<h3> Add a Dish! </h3>
 <div>
   <%= form.label :dish_id, "Dish" %>
   <%= form.collection_select(:dish_id, Dish.all, :id, :title) %>
