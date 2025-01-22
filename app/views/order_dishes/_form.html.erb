@@ -1,21 +1,15 @@
-<div class="order-item-fields">
-  <div>
-    <%= f.label :dish_id, "Dish" %>
-    <%= f.collection_select :dish_id, Dish.all, :id, :name, prompt: "Select Dish" %>
-  </div>
+<div>
+    <h3>Add a dish!</h3>
+    <%= form.fields_for :order_dishes do |od_form| %>
+      <div>
+        <%= od_form.label :dish_id, "Dish" %>
+        <%= od_form.collection_select(:dish_id, Dish.all, :id, :title) %>
+      </div>
+      <div>
+        <%= od_form.label :quantity %>
+        <%= od_form.number_field :quantity, min: 1 %>
+      </div>
 
-  <div>
-    <%= f.label :quantity %>
-    <%= f.number_field :quantity, value: 1, min: 1 %>
+      <%= form.submit "Add Dish" %>
+    <% end %>
   </div>
-
-  <div>
-    <%= f.label :total_price %>
-    <%= f.number_field :total_price, step: 0.01, readonly: true %> <!-- Automatically calculated -->
-  </div>
-
-  <div>
-    <%= f.submit "Add Dish" %>
-  </div>
-
-</div>

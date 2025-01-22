@@ -1,1 +1,17 @@
 <%= render @order %>
+
+<h2>Dishes in this Order</h2>
+
+<div>
+  <% @order_dishes.each do |dish| %>
+    <li>
+      Dish name: <%= dish.dish.title %>
+    </li>
+    <li>
+      Quantity: <%= dish.quantity %>
+    </li>
+    <li>
+      Total price: <%= dish.price %>
+    </li>
+  <% end %>
+</div>
