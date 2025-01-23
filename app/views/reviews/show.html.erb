@@ -1,0 +1,7 @@
+<h1>Review for <%= @review.dish.title %></h1>
+
+<p><strong>Rating:</strong> <%= @review.rating %></p>
+<p><strong>Comment:</strong> <%= @review.comment %></p>
+
+<%= link_to 'Edit', edit_review_path(@review) %> |
+<%= link_to 'Back to Dish', @review.dish %>
