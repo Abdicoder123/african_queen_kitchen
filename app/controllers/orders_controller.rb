@@ -53,11 +53,12 @@ class OrdersController < ApplicationController
   end
 
   def destroy
-    @order.destroy!
-
-    respond_to do |format|
-      format.html { redirect_to orders_path, status: :see_other, notice: "Order was successfully destroyed." }
-      format.json { head :no_content }
+    @order = Order.find(params[:id])
+    if @order.destroy!
+      respond_to do |format|
+        format.html { redirect_to orders_path, status: :see_other, notice: "Order was successfully destroyed." }
+        format.json { head :no_content }
+      end
     end
   end
   

@@ -15,6 +15,7 @@ class OrderDishesController < ApplicationController
         end
     end
 
+
     private
     # Only allow a list of trusted parameters through.
     def order_dish_params
