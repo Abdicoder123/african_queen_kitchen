@@ -47,10 +47,10 @@ class OrdersController < ApplicationController
         service = CreateInvoiceService.new(@order.id) 
         result = service.create_invoice
 
-        if result[:success]
-          flash[:notice] = "Order updated and invoice created successfully! Invoice ID: #{result[:invoice_id]}"
+        if result
+          flash[:notice] = "Order was submitted and invoice created successfully!}"
         else
-          flash[:alert] = "Order updated, but invoice creation failed: #{result[:error]}"
+          flash[:alert] = "Order was submitted, but invoice creation failed: #{result[:error]}"
         end
 
         format.html { redirect_to @order, notice: "Order was submitted." }
