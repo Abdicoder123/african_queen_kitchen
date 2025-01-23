@@ -31,4 +31,5 @@ class User < ApplicationRecord
       Stripe::Customer.delete(stripe_customer_id)
     end
   end
+  has_many :orders, dependent: :destroy
 end
