@@ -38,10 +38,21 @@ class OrdersController < ApplicationController
 
   def update
     @order = Order.find(params[:id])
-
+    
     respond_to do |format|
       if @order.update(order_params)
         @order.update(status: "Pending")
+
+        # Call the CreateInvoiceService
+        service = CreateInvoiceService.new(@order.id) 
+        result = service.create_invoice
+
+        if result[:success]
+          flash[:notice] = "Order updated and invoice created successfully! Invoice ID: #{result[:invoice_id]}"
+        else
+          flash[:alert] = "Order updated, but invoice creation failed: #{result[:error]}"
+        end
+
         format.html { redirect_to @order, notice: "Order was submitted." }
         format.json { render :show, status: :ok, location: @order }
       else
