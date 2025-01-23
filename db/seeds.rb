@@ -7,4 +7,40 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+
+puts "Seeding database"
+AdminUser.destroy_all
+Menu.destroy_all
+Dish.destroy_all
+Order.destroy_all
+OrderDish.destroy_all
+
+# Create sample menus
+menus = Menu.create!([
+  { title: 'Italian Cuisine', description: 'A variety of Italian dishes', category: 'Cuisine' },
+  { title: 'Salads', description: 'Fresh and healthy salads', category: 'Appetizer' }
+])
+
+# Create sample dishes associated with menus
+dishes = Dish.create!([
+  { menu_id: menus[0].id, title: 'Pasta', price: 12.50 },
+  { menu_id: menus[1].id, title: 'Salad', price: 8.75 }
+])
+
+# Create sample orders
+orders = Order.create!([
+  { user_id: 8, delivery_date: '2025-01-25', status: 'Pending', event_details: 'Office catering', group_size: 30, total_cost: 450.00 },
+  { user_id: 8, delivery_date: '2025-01-26', status: 'Confirmed', event_details: 'Birthday party', group_size: 20, total_cost: 300.00 }
+])
+
+# Create sample order items (OrderDish)
+OrderDish.create!([
+  { order_id: orders[0].id, dish_id: dishes[0].id, quantity: 10, price: 125.00 },
+  { order_id: orders[1].id, dish_id: dishes[1].id, quantity: 5, price: 43.75 }
+])
+
+
+
+
+
 AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
