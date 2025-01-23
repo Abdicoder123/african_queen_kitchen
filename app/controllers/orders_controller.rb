@@ -20,7 +20,7 @@ class OrdersController < ApplicationController
   
     respond_to do |format|
       if @order.save
-        format.html { redirect_to @order, notice: "Order was successfully created." }
+        format.html { redirect_to edit_order_path(@order), notice: "Order was successfully created." }
         format.json { render :edit, status: :created, location: @order }
       else
         # Log error messages for debugging
@@ -36,7 +36,10 @@ class OrdersController < ApplicationController
     @order = Order.find(params[:id])
     @order_dishes = @order.order_dishes
   end
+
   def update
+    @order = Order.find(params[:id])
+
     respond_to do |format|
       if @order.update(order_params)
         @order.update(status: "Pending")
@@ -53,7 +56,7 @@ class OrdersController < ApplicationController
     @order.destroy!
 
     respond_to do |format|
-      format.html { redirect_to orders_path, status: :see_other, notice: "Lake was successfully destroyed." }
+      format.html { redirect_to orders_path, status: :see_other, notice: "Order was successfully destroyed." }
       format.json { head :no_content }
     end
   end
