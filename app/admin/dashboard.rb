@@ -33,26 +33,17 @@ ActiveAdmin.register_page "Dashboard" do
           div { link_to "View All Dishes", admin_dishes_path }
         end
       end
+
+      column do
+        panel "Recent Orders" do
+          table_for Order.order(created_at: :desc).limit(5) do
+            column(:id)
+            column(:user)
+            column(:total_price)
+          end
+          div { link_to "View All Orders", admin_orders_path }
+        end
+      end
     end
-
-    # Here is an example of a simple dashboard with columns and panels.
-    #
-    # columns do
-    #   column do
-    #     panel "Recent Posts" do
-    #       ul do
-    #         Post.recent(5).map do |post|
-    #           li link_to(post.title, admin_post_path(post))
-    #         end
-    #       end
-    #     end
-    #   end
-
-    #   column do
-    #     panel "Info" do
-    #       para "Welcome to ActiveAdmin."
-    #     end
-    #   end
-    # end
-  end # content
+  end
 end
