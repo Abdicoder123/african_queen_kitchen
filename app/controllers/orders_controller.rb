@@ -21,13 +21,40 @@ class OrdersController < ApplicationController
     respond_to do |format|
       if @order.save
         format.html { redirect_to @order, notice: "Order was successfully created." }
-        format.json { render :show, status: :created, location: @order }
+        format.json { render :edit, status: :created, location: @order }
       else
         # Log error messages for debugging
         flash.now[:alert] = @order.errors.full_messages.join(", ")
         format.html { render :new, status: :unprocessable_entity, notice: "Fill the form completey"}
         format.json { render json: @order.errors, status: :unprocessable_entity }
       end
+    end
+  end
+
+
+  def edit
+    @order = Order.find(params[:id])
+    @order_dishes = @order.order_dishes
+  end
+  def update
+    respond_to do |format|
+      if @order.update(order_params)
+        @order.update(status: "Pending")
+        format.html { redirect_to @order, notice: "Order was submitted." }
+        format.json { render :show, status: :ok, location: @order }
+      else
+        format.html { render :edit, status: :unprocessable_entity }
+        format.json { render json: @order.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def destroy
+    @order.destroy!
+
+    respond_to do |format|
+      format.html { redirect_to orders_path, status: :see_other, notice: "Lake was successfully destroyed." }
+      format.json { head :no_content }
     end
   end
   

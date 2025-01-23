@@ -8,8 +8,4 @@
 <!-- Renders the dishes in the order -->
 <%= render 'dish' %>
 
-<!-- Users can only add dishes to their orders if the status of their order is "Order Creation" -->
-<% if @order.status === 'Order Creation' %>
-    <%= render 'order_dishes/form', order: @order %>
-<% end %>
 

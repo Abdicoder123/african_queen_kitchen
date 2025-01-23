@@ -3,7 +3,12 @@
 <div> 
     <% @orders.each do |order| %>
         <%= render order %>
-        <p><%= link_to "Show this order", order%></p>
+        <% if order.status === 'Order Creation' %>
+            <p><%= link_to "Continue to create my order", edit_order_path(order) %></p>
+        <% else %>
+            <p><%= link_to "Show this order", order%></p>
+        <% end %>
+
     <% end %> 
 </div>
 

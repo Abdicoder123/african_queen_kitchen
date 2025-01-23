@@ -9,9 +9,9 @@ class OrderDishesController < ApplicationController
         @order_dish = @order.order_dishes.create(order_dish_params)
 
         if @order_dish.save
-          redirect_to order_path(@order), notice: "Dish was added successfully."
+          redirect_to edit_order_path(@order), notice: "Dish was added successfully."
         else
-          redirect_to order_path(@order), notice: "Make sure you fill in the form completely!"
+          redirect_to edit_order_path(@order), notice: "Make sure you fill in the form completely!"
         end
     end
 
