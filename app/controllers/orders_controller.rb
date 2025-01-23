@@ -2,9 +2,8 @@ class OrdersController < ApplicationController
   before_action :authenticate_user!
   def index
     @orders = Order.order(created_at: :desc)
-
   end
-  
+
   def show
     @order = Order.find(params[:id])
     @order_dishes = @order.order_dishes
@@ -12,12 +11,12 @@ class OrdersController < ApplicationController
   end
 
   def new
-    @order = Order.new 
+    @order = Order.new
   end
 
   def create
     @order = current_user.orders.new(order_params)
-  
+
     respond_to do |format|
       if @order.save
         format.html { redirect_to edit_order_path(@order), notice: "Order was successfully created." }
@@ -25,7 +24,7 @@ class OrdersController < ApplicationController
       else
         # Log error messages for debugging
         flash.now[:alert] = @order.errors.full_messages.join(", ")
-        format.html { render :new, status: :unprocessable_entity, notice: "Fill the form completey"}
+        format.html { render :new, status: :unprocessable_entity, notice: "Fill the form completey" }
         format.json { render json: @order.errors, status: :unprocessable_entity }
       end
     end
@@ -61,8 +60,8 @@ class OrdersController < ApplicationController
       end
     end
   end
-  
-  
+
+
 
   private
 

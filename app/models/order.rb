@@ -7,7 +7,7 @@ class Order < ApplicationRecord
     validates :event_details, presence: true
     validates :group_size, presence: true
 
-    before_save :set_creation_status #Sets the status of the order automatically to pending when user submits
+    before_save :set_creation_status # Sets the status of the order automatically to pending when user submits
 
 
     private

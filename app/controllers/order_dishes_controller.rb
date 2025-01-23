@@ -1,9 +1,8 @@
 class OrderDishesController < ApplicationController
-    
     def new
         @order_dish = Order_dish.new
     end
-    
+
     def create
         @order = Order.find(params[:order_id])
         @order_dish = @order.order_dishes.create(order_dish_params)
