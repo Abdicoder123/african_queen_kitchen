@@ -2,7 +2,7 @@
 
 
 <%= form_with(model: @order, local: true) do |form| %>
-  <h3>Fill out the form below</h3>
+  <h3>Fill out the form below and click (Create Order) to start adding dishes.</h3>
   <div>
     <%= form.label :delivery_date %>
     <%= form.date_field :delivery_date %>
@@ -20,7 +20,7 @@
   </div>
 
   <div>
-    <%= form.submit "Save Order" %>
+    <%= form.submit "Create Order" %>
   </div>
   <% end %>
   
