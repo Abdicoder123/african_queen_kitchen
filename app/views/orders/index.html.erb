@@ -1,0 +1,15 @@
+<h1>Order History</h1>
+
+<div> 
+    <% @orders.each do |order| %>
+        <%= render order %>
+        <% if order.status === 'Order Creation' %>
+            <p><%= link_to "Continue to create my order", edit_order_path(order) %></p>
+        <% else %>
+            <p><%= link_to "Show this order", order%></p>
+        <% end %>
+
+    <% end %> 
+</div>
+
+<p><%= link_to "New Order", new_order_path %></p>

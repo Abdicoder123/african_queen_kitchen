@@ -1,0 +1,14 @@
+<!-- This div contains the dish name, quantity, 
+and the total price (price of dish * quantity) -->
+
+<div>
+  <% @order_dishes.each do |dish| %>
+    <li>
+      Dish name: <%= dish.dish.title %>
+    </li>
+    <li>
+      Quantity: <%= dish.quantity %>
+    </li>
+  <% end %>
+</div>
+
