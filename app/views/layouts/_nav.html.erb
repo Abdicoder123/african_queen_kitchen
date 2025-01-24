@@ -24,26 +24,26 @@
 
       <ul class="navbar-nav ms-auto">
         <li class="nav-item dropdown">
-            <% if user_signed_in? %>
-              <a class="nav-link dropdown-toggle" href="javascript:void(0)" id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                My Account
-              </a>
-              <ul class="dropdown-menu dropdown-menu-end">
-                <li class"nav-link dropdown-item">
-                  <a class="nav-link" href="<%= orders_path %>">My Orders</a>
-                </li>
-                <li class="nav-item ms-auto">
-                  <a class="nav-link dropdown-item" href="<%= edit_user_registration_path %>">My Profile</a>
-                </li>
-                <li class="nav-item">
-                  <%= button_to "Sign Out", destroy_user_session_path, method: :delete, :class => "nav-link ms-auto dropdown-item" %>
-                </li>
-            <% else %>
-                <li class="nav-item">
-                  <a class="nav-link active ms-auto dropdown-item" href="<%= user_session_path %>">Login</a>
-                </li>
-            <% end %>
+          <% if user_signed_in? %>
+            <a class="nav-link dropdown-toggle" href="#" id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              My Account
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
+              <li>
+                <a class="dropdown-item" href="<%= orders_path %>">My Orders</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="<%= edit_user_registration_path %>">My Profile</a>
+              </li>
+              <li>
+                <%= button_to "Sign Out", destroy_user_session_path, method: :delete, :class => "dropdown-item" %>
+              </li>
             </ul>
+          <% else %>
+            <li class="nav-item">
+              <a class="nav-link dropdown-item" href="<%= user_session_path %>">Login</a>
+            </li>
+          <% end %>
         </li>
       </ul>
     </div>
