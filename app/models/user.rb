@@ -35,5 +35,4 @@ class User < ApplicationRecord
       Stripe::Customer.delete(stripe_customer_id)
     end
   end
-  
 end

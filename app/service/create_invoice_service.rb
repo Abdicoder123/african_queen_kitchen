@@ -21,8 +21,6 @@ class CreateInvoiceService
       create_invoice_items(stripe_invoice)
       save_invoice(user, stripe_invoice)
     end
-
-
   end
 
 
