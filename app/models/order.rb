@@ -6,7 +6,7 @@ class Order < ApplicationRecord
     validates :delivery_date, presence: true
     validates :event_details, presence: true
     validates :group_size, presence: true
-  
+
     def self.ransackable_associations(auth_object = nil)
         [ "dishes", "order_dishes", "user" ]
     end
