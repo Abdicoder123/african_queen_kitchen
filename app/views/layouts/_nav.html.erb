@@ -29,19 +29,15 @@
               My Account
             </a>
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
+              <li><a class="dropdown-item" href="<%= orders_path %>">My Orders</a></li>
+              <li><a class="dropdown-item" href="<%= edit_user_registration_path %>">My Profile</a></li>
               <li>
-                <a class="dropdown-item" href="<%= orders_path %>">My Orders</a>
-              </li>
-              <li>
-                <a class="dropdown-item" href="<%= edit_user_registration_path %>">My Profile</a>
-              </li>
-              <li>
-                <%= button_to "Sign Out", destroy_user_session_path, method: :delete, :class => "dropdown-item" %>
+                <%= button_to "Sign Out", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
               </li>
             </ul>
           <% else %>
             <li class="nav-item">
-              <a class="nav-link dropdown-item" href="<%= user_session_path %>">Login</a>
+              <a class="nav-link active ms-auto" href="<%= user_session_path %>">Login</a>
             </li>
           <% end %>
         </li>
