@@ -2,6 +2,13 @@ ActiveAdmin.register Order do
   permit_params :user_id, :delivery_date, :status, :event_details, :group_size, :total_cost
 
   index do
+
+    panel "Order Overview" do
+      div do
+        h3 "Manage and accept your orders"
+      end
+    end
+
     selectable_column
     id_column
     column :user
@@ -11,7 +18,15 @@ ActiveAdmin.register Order do
     column :total_price
     column :created_at
     column :updated_at
-    actions
+
+    # Define the Actions column
+    column "Actions" do |order|
+      # Check if the invoice status is 'Pending' and the order is not yet accepted
+      if order.status == 'Pending'
+        # Add a button to accept the order
+        link_to 'Accept Order'
+      end
+    end
   end
 
   actions :all, except: [ :new, :create, :destroy ]
