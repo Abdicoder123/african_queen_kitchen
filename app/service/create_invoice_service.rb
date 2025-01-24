@@ -12,7 +12,7 @@ class CreateInvoiceService
     invoice = Stripe::Invoice.create({
       customer: stripe_customer_id,
       description: "Invoice for Orders: #{@order_dishes.map { |dish| dish.dish.title }.join(', ')}", 
-      auto_advance: true,
+      auto_advance: false,
       collection_method: 'send_invoice',
       days_until_due: 30,
     })
