@@ -24,14 +24,14 @@
 
       <ul class="navbar-nav ms-auto">
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="javascript:void(0)" id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <% if user_signed_in? %>
+            <a class="nav-link dropdown-toggle" href="javascript:void(0)" id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             My Account
           </a>
           <ul class="dropdown-menu dropdown-menu-end">
             <li class"nav-link dropdown-item">
               <a class="nav-link" href="<%= orders_path %>">My Orders</a>
             </li>
-            <% if user_signed_in? %>
               <li class="nav-item ms-auto">
                 <a class="nav-link dropdown-item" href="<%= edit_user_registration_path %>">My Profile</a>
               </li>
@@ -40,7 +40,7 @@
               </li>
             <% else %>
               <li class="nav-item">
-                <a class="nav-link ms-auto dropdown-item" href="<%= user_session_path %>">Login</a>
+                <a class="nav-link active ms-auto dropdown-item" href="<%= user_session_path %>">Login</a>
               </li>
             <% end %>
           </ul>
