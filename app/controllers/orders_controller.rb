@@ -38,13 +38,13 @@ class OrdersController < ApplicationController
 
   def update
     @order = Order.find(params[:id])
-    
+
     respond_to do |format|
       if @order.update(order_params)
         @order.update(status: "Pending")
 
         # Call the CreateInvoiceService
-        service = CreateInvoiceService.new(@order.id) 
+        service = CreateInvoiceService.new(@order.id)
         result = service.create_invoice
 
         if result
