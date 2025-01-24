@@ -1,0 +1,12 @@
+<h1>All Reviews</h1>
+
+<ul>
+  <% @reviews.each do |review| %>
+    <li>
+      Rating: <%= review.rating %> - Comment: <%= review.comment %>
+      <%= link_to 'Show Details', review_path(review) %>
+    </li>
+  <% end %>
+</ul>
+
+<%= link_to 'Write a Review', new_review_path %>
