@@ -4,7 +4,10 @@
   <% @reviews.each do |review| %>
     <li>
       Rating: <%= review.rating %> - Comment: <%= review.comment %>
-      <%= link_to 'Show Details', review_path(review) %>
+    <% if user_signed_in? %>
+        <%= link_to 'Show Details', review_path(review) %>
+    <% end %>
+
     </li>
   <% end %>
 </ul>
