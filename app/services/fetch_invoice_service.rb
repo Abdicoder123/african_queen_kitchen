@@ -7,4 +7,3 @@ class FetchInvoiceService
       invoice = Stripe::Invoice.retrieve(@stripe_invoice_id)
   end
 end
-  

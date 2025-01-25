@@ -14,7 +14,7 @@ class User < ApplicationRecord
   has_many :invoices, dependent: :destroy
 
   def self.ransackable_attributes(auth_object = nil)
-    ["id"]
+    [ "id" ]
   end
 
 
