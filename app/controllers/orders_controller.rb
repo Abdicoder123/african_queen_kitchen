@@ -1,7 +1,7 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!
   def index
-    @orders = Order.order(created_at: :desc)
+    @orders = current_user.orders.order(created_at: :desc)
   end
 
   def show
@@ -42,6 +42,17 @@ class OrdersController < ApplicationController
     respond_to do |format|
       if @order.update(order_params)
         @order.update(status: "Pending")
+
+        # Call the CreateInvoiceService
+        service = CreateInvoiceService.new(@order.id)
+        result = service.create_invoice
+
+        if result
+          flash[:notice] = "Order was submitted and invoice created successfully!}"
+        else
+          flash[:alert] = "Order was submitted, but invoice creation failed: #{result[:error]}"
+        end
+
         format.html { redirect_to @order, notice: "Order was submitted." }
         format.json { render :show, status: :ok, location: @order }
       else
