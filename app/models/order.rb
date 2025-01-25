@@ -2,6 +2,7 @@ class Order < ApplicationRecord
     belongs_to :user
     has_many :order_dishes, dependent: :destroy
     has_many :dishes, through: :order_dishes
+    has_one :invoice
 
     validates :delivery_date, presence: true
     validates :event_details, presence: true
