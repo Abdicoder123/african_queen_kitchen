@@ -20,13 +20,6 @@
   <body>
     <%= render "layouts/nav" %>
     
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
-    
-    <div class="container">
-      <%= yield %>
-    </div>
-    
     <% if notice %>
       <div class="alert alert-success"><%= notice %></div>
     <% end %>
@@ -34,6 +27,10 @@
     <% if alert %>
       <div class="alert alert-danger"><%= alert %></div>
     <% end %>
+    
+    <div class="container">
+      <%= yield %>
+    </div>
 
   </body>
 </html>
