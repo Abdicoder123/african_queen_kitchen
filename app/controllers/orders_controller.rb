@@ -8,6 +8,8 @@ class OrdersController < ApplicationController
     @order = Order.find(params[:id])
     @order_dishes = @order.order_dishes
     @dishes = @order.dishes
+
+    #Redirect to stripe checkout session logic
   end
 
   def new
