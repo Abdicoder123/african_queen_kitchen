@@ -26,18 +26,15 @@ class InvoicesController < ApplicationController
 
   # PATCH/PUT /invoices/1 or /invoices/1.json
   def update
-    @order = @invoice.order
-    # Finalize the invoice and send it
-
-    # Create service to grab the total amount
-    service = FetchInvoiceService.new(@invoice.stripe_invoice_id)
-    result = service.fetch_invoice
-
-    # Update invoice and order model
-    @invoice.update(invoice_status: "Payment Pending", total_amount: result )
-    @order.update(status: "Confirmed", total_cost: result )
-
-
+    respond_to do |format|
+      if @invoice.update(invoice_params)
+        format.html { redirect_to @invoice, notice: "Invoice was successfully updated." }
+        format.json { render :show, status: :ok, location: @invoice }
+      else
+        format.html { render :edit, status: :unprocessable_entity }
+        format.json { render json: @invoice.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   # DELETE /invoices/1 or /invoices/1.json
@@ -58,6 +55,6 @@ class InvoicesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def invoice_params
-      params.require(:invoice).permit(:stripe_invoice_id, :currency, :description, :total_amount, :invoice_status, order_attributes: [:status, :total_cost])
+      params.require(:invoice).permit(:stripe_invoice_id, :currency, :description, :total_amount, :invoice_status)
     end
 end
