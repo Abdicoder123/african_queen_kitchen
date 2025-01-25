@@ -10,6 +10,10 @@ class User < ApplicationRecord
   after_save :create_stripe_customer
   before_destroy :delete_stripe_customer
 
+  has_many :orders, dependent: :destroy
+  has_many :invoices, dependent: :destroy
+
+
 
 
   private
@@ -31,5 +35,4 @@ class User < ApplicationRecord
       Stripe::Customer.delete(stripe_customer_id)
     end
   end
-  has_many :orders, dependent: :destroy
 end
