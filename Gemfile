@@ -35,7 +35,7 @@ gem "bootsnap", require: false
 # gem "image_processing", "~> 1.2"
 
 # bootstrap and sass engine
-gem "bootstrap", "~> 5.2", ">= 5.2.3"
+gem "bootstrap", "~> 5.3"
 gem "sassc-rails"
 
 group :development, :test do
