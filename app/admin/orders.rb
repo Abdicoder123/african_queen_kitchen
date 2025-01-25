@@ -24,7 +24,7 @@ ActiveAdmin.register Order do
       # Check if the invoice status is 'Pending' and the order is not yet accepted
       if order.status == 'Pending'
         # Add a button to accept the order
-        link_to 'Accept Order'
+        link_to "Accept Order"
       end
     end
   end
