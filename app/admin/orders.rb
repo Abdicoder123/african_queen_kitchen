@@ -1,6 +1,6 @@
 ActiveAdmin.register Order do
   permit_params :user_id, :delivery_date, :status, :event_details, :group_size, :total_cost
-
+ 
   #Action to update invoice
   member_action :update_invoice, method: :patch do
     order = Order.find(params[:id]) # Fetch the order from params
@@ -9,10 +9,11 @@ ActiveAdmin.register Order do
     # Check if the invoice exists
     if invoice
       stripe_invoice_id = invoice.stripe_invoice_id # Fetch the Stripe invoice ID
+      Rails.logger.debug "XXXXXXXXXXXXXXXX: #{stripe_invoice_id}"
       service = FetchInvoiceService.new(stripe_invoice_id) # Call your service to fetch invoice details
       result = service.fetch_invoice 
   
-      if result.success?
+      if result
         # Update the invoice and order with the fetched data
         invoice.update(invoice_status: "Payment Pending", total_amount: result.amount_due)
         order.update(status: "Confirmed", total_cost: result.amount_due)
