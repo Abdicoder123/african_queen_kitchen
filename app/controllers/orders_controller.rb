@@ -14,9 +14,9 @@ class OrdersController < ApplicationController
   def pay
     @order = Order.find(params[:id])
     @invoice = @order.invoice
-    #Redirect to stripe checkout session logic
+    # Redirect to stripe checkout session logic
     if @invoice.invoice_status === "Payment Pending" && @order.status == "Confirmed"
-      if @invoice.stripe_checkout_session_id.blank? 
+      if @invoice.stripe_checkout_session_id.blank?
         service = StripeCheckoutService.new(@invoice)
         session = service.create_checkout_session
         redirect_to session.url, allow_other_host: true
