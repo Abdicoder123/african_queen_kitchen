@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_01_26_170717) do
+ActiveRecord::Schema[7.2].define(version: 2025_01_26_222933) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -93,7 +93,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_01_26_170717) do
     t.string "status"
     t.text "event_details"
     t.integer "group_size"
-    t.decimal "total_cost"
+    t.decimal "total_cost", precision: 10, scale: 2
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_orders_on_user_id"
