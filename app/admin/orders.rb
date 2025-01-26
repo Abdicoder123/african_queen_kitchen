@@ -1,7 +1,43 @@
 ActiveAdmin.register Order do
   permit_params :user_id, :delivery_date, :status, :event_details, :group_size, :total_cost
 
+  # Action to update invoice
+  member_action :update_invoice, method: :patch do
+    order = Order.find(params[:id]) # Fetch the order from params
+    invoice = order.invoice # Access the invoice associated with the order
+
+    # Check if the invoice exists
+    if invoice
+      stripe_invoice_id = invoice.stripe_invoice_id # Fetch the Stripe invoice ID
+      Rails.logger.debug "XXXXXXXXXXXXXXXX: #{stripe_invoice_id}"
+      service = FetchInvoiceService.new(stripe_invoice_id) # Call your service to fetch invoice details
+      result = service.fetch_invoice
+      totalInDollars = result.amount_due / 100
+
+      if result
+        # Update the invoice and order with the fetched data
+        invoice.update(invoice_status: "Payment Pending", total_amount: totalInDollars)
+        order.update(status: "Confirmed", total_cost: totalInDollars)
+
+        flash[:notice] = "Invoice and order updated successfully."
+      else
+        flash[:alert] = "Failed to fetch invoice details."
+      end
+    else
+      flash[:alert] = "Invoice not found for this order."
+    end
+
+    redirect_to admin_order_path(order) # Redirect to the order's show page
+  end
+
+
   index do
+    panel "Order Overview" do
+      div do
+        h3 "Manage and accept your orders"
+      end
+    end
+
     selectable_column
     id_column
     column :user
@@ -11,8 +47,17 @@ ActiveAdmin.register Order do
     column :total_price
     column :created_at
     column :updated_at
-    actions
+
+    # Define the Actions column
+    column "Actions" do |order|
+      # Check if the order is still Pending
+      if order.status == "Pending" && order.invoice.present? # Ensure the order has an invoice
+        # Add a button to accept the order and update the invoice
+        link_to "Accept Order", update_invoice_admin_order_path(order), method: :patch
+      end
+    end
   end
+
 
   actions :all, except: [ :new, :create, :destroy ]
 
