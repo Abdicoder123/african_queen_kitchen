@@ -1,11 +1,13 @@
 class StripeCheckoutService
-    def initialize(invoice)
+    def initialize(invoice, user)
+      @user = user
       @invoice = invoice
     end
 
     def create_checkout_session
         session = Stripe::Checkout::Session.create({
-        payment_method_types: [ "card" ], # You can add other payment methods like Apple Pay, Google Pay
+        payment_method_types: [ "card" ], 
+        customer: @user.stripe_customer_id,
         line_items: [
           {
             price_data: {

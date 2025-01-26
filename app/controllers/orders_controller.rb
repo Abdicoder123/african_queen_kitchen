@@ -2,6 +2,18 @@ class OrdersController < ApplicationController
   before_action :authenticate_user!
   def index
     @orders = current_user.orders.order(created_at: :desc)
+    
+    # Fetch all checkout sessions for a customer
+    sessions = Stripe::Checkout::Session.list(customer: current_user.stripe_customer_id)
+
+    # Use the retrieved sessions to update your invoices
+    sessions.each do |session|
+      Rails.logger.debug "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+      invoice = Invoice.find_by(stripe_checkout_session_id: session.id)
+      if invoice
+        update_payment(invoice,session)
+      end
+    end
   end
 
   def show
@@ -9,20 +21,17 @@ class OrdersController < ApplicationController
     @order_dishes = @order.order_dishes
     @dishes = @order.dishes
     @invoice = @order.invoice
-
-    if @invoice.stripe_checkout_session_id
-      fetch_checkout_session
-    end
   end
 
   def pay
     @order = Order.find(params[:id])
     @invoice = @order.invoice
+    @user = @order.user
 
     # Redirect to stripe checkout session logic
     if @invoice.invoice_status === "Payment Pending" && @order.status == "Confirmed"
       if @invoice.stripe_checkout_session_id.blank?
-        service = StripeCheckoutService.new(@invoice)
+        service = StripeCheckoutService.new(@invoice, @user)
         session = service.create_checkout_session
         redirect_to session.url, allow_other_host: true
       else
@@ -98,10 +107,15 @@ class OrdersController < ApplicationController
 
   private
 
-  def update_payment(session)
-    @invoice.update(invoice_status: "Paid")
-    @order.update(status: "Completed")
-    @payment = @order.create_payment(payment_status: session.payment_status)
+  def update_payment(invoice, session)
+    # Make sure you find the associated order based on the invoice
+    order = invoice.order
+    if order
+      # Update the invoice, order and create payment status
+      invoice.update(invoice_status: "Paid")
+      order.update(status: "Completed")
+      payment = order.create_payment(payment_status: session.payment_status)
+    end
   end
 
   def fetch_checkout_session
@@ -109,9 +123,10 @@ class OrdersController < ApplicationController
     if session.payment_status == "paid"
       # Proceed with payment confirmation
       update_payment(session)
+      redirect_to orders_path
       flash[:notice] = "Order has already been paid for!"
     end
-end
+  end
 
   def order_params
     params.require(:order).permit(:delivery_date, :status, :event_details, :group_size, :total_cost)
