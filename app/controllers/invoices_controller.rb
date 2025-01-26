@@ -21,7 +21,6 @@ class InvoicesController < ApplicationController
 
   # POST /invoices or /invoices.json
   def create
-    @invoice = Invoice.new(invoice_params)
   end
 
   # PATCH/PUT /invoices/1 or /invoices/1.json
