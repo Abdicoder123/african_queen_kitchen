@@ -21,7 +21,13 @@ class InvoicesController < ApplicationController
 
   # POST /invoices or /invoices.json
   def create
-    @invoice = Invoice.new(invoice_params)
+    @invoice = Invoice.new
+    create_invoice_service = CreateInvoiceService.new(invoice_params[:order_id])
+
+    create_invoice_service.create_invoice
+
+    # Redirect to the newly created invoice
+    redirect_to invoices_path, notice: "Invoice was successfully created and sent via email."
   end
 
   # PATCH/PUT /invoices/1 or /invoices/1.json

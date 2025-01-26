@@ -20,6 +20,10 @@ class CreateInvoiceService
     if stripe_invoice
       create_invoice_items(stripe_invoice)
       save_invoice(user, stripe_invoice)
+
+      # Send the invoice email to the user associated with this invoice
+      # Finalize the invoice so it gets sent out
+      Stripe::Invoice.finalize_invoice(stripe_invoice.id)
     end
   end
 
