@@ -33,7 +33,7 @@ class OrdersController < ApplicationController
           @invoice.update(invoice_status: "Paid")
           @order.update(status: "Completed")
           redirect_to orders_path
-          flash[:notice] = "Order has already been paid for!}"
+          flash[:notice] = "Order has already been paid for!"
         else
           redirect_to session.url, allow_other_host: true
         end
@@ -81,7 +81,7 @@ class OrdersController < ApplicationController
         result = service.create_invoice
 
         if result
-          flash[:notice] = "Order was submitted and invoice created successfully!}"
+          flash[:notice] = "Order was submitted! Waiting for approval.}"
         else
           flash[:alert] = "Order was submitted, but invoice creation failed: #{result[:error]}"
         end
