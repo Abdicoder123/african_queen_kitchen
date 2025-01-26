@@ -10,7 +10,7 @@ class Order < ApplicationRecord
     validates :group_size, presence: true
 
     def self.ransackable_associations(auth_object = nil)
-        [ "dishes", "order_dishes", "user", "invoice" , "payment"]
+        [ "dishes", "order_dishes", "user", "invoice", "payment" ]
     end
 
     def self.ransackable_attributes(auth_object = nil)

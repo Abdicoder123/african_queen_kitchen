@@ -2,16 +2,15 @@ class OrdersController < ApplicationController
   before_action :authenticate_user!
   def index
     @orders = current_user.orders.order(created_at: :desc)
-    
+
     # Fetch all checkout sessions for a customer
     sessions = Stripe::Checkout::Session.list(customer: current_user.stripe_customer_id)
 
     # Use the retrieved sessions to update your invoices
     sessions.each do |session|
-      Rails.logger.debug "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
       invoice = Invoice.find_by(stripe_checkout_session_id: session.id)
       if invoice
-        update_payment(invoice,session)
+        update_payment(invoice, session)
       end
     end
   end

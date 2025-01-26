@@ -2,7 +2,7 @@ class Payment < ApplicationRecord
     belongs_to :order
 
     def self.ransackable_associations(auth_object = nil)
-        [ "order"]
+        [ "order" ]
     end
 
     def self.ransackable_attributes(auth_object = nil)
