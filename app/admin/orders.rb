@@ -9,7 +9,6 @@ ActiveAdmin.register Order do
     # Check if the invoice exists
     if invoice
       stripe_invoice_id = invoice.stripe_invoice_id # Fetch the Stripe invoice ID
-      Rails.logger.debug "XXXXXXXXXXXXXXXX: #{stripe_invoice_id}"
       service = FetchInvoiceService.new(stripe_invoice_id) # Call your service to fetch invoice details
       result = service.fetch_invoice
       totalInDollars = result.amount_due / 100

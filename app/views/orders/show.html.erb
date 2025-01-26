@@ -8,4 +8,7 @@
 <!-- Renders the dishes in the order -->
 <%= render 'dish' %>
 
+<% if @invoice.invoice_status == "Payment Pending" %>
+    <p><%= link_to "Pay Now", pay_path(@order)%></p>
+<% end %>
 
