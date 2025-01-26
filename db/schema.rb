@@ -61,6 +61,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_01_26_170717) do
     t.string "currency"
     t.text "description"
     t.bigint "user_id"
+    t.string "stripe_checkout_session_id"
     t.index ["order_id"], name: "index_invoices_on_order_id"
     t.index ["user_id"], name: "index_invoices_on_user_id"
   end
