@@ -1,0 +1,14 @@
+<h1>Order Page</h1>
+
+<!-- Renders order details -->
+<%= render @order %>
+
+<h2>Dishes in this Order</h2>
+
+<!-- Renders the dishes in the order -->
+<%= render 'dish' %>
+
+<% if @invoice.invoice_status == "Payment Pending" %>
+    <p><%= link_to "Pay Now", pay_path(@order)%></p>
+<% end %>
+

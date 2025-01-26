@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_01_21_174923) do
+ActiveRecord::Schema[7.2].define(version: 2025_01_25_235342) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -53,13 +53,17 @@ ActiveRecord::Schema[7.2].define(version: 2025_01_21_174923) do
 
   create_table "invoices", force: :cascade do |t|
     t.bigint "order_id"
-    t.date "invoice_date"
-    t.date "due_date"
     t.decimal "total_amount"
     t.string "invoice_status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "stripe_invoice_id"
+    t.string "currency"
+    t.text "description"
+    t.bigint "user_id"
+    t.string "stripe_checkout_session_id"
     t.index ["order_id"], name: "index_invoices_on_order_id"
+    t.index ["user_id"], name: "index_invoices_on_user_id"
   end
 
   create_table "menus", force: :cascade do |t|
@@ -89,7 +93,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_01_21_174923) do
     t.string "status"
     t.text "event_details"
     t.integer "group_size"
-    t.decimal "total_cost"
+    t.integer "total_cost"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_orders_on_user_id"
@@ -125,6 +129,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_01_21_174923) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "stripe_customer_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
