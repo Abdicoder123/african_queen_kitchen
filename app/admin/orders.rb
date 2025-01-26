@@ -11,7 +11,7 @@ ActiveAdmin.register Order do
       stripe_invoice_id = invoice.stripe_invoice_id # Fetch the Stripe invoice ID
       service = FetchInvoiceService.new(stripe_invoice_id) # Call service to fetch invoice details
       result = service.fetch_invoice
-      totalInDollars = result.amount_due / 100
+      totalInDollars = (result.amount_due.to_f) / 100
 
       if result
         # Send the invoice email to the user associated with this invoice
