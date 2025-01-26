@@ -8,9 +8,40 @@ class OrdersController < ApplicationController
     @order = Order.find(params[:id])
     @order_dishes = @order.order_dishes
     @dishes = @order.dishes
-
-    #Redirect to stripe checkout session logic
+    @invoice = @order.invoice
   end
+
+  def pay
+    @order = Order.find(params[:id])
+    @invoice = @order.invoice
+    #Redirect to stripe checkout session logic
+    if @invoice.invoice_status === "Payment Pending" && @order.status == "Confirmed"
+      if @invoice.stripe_checkout_session_id.blank? 
+        service = StripeCheckoutService.new(@invoice)
+        session = service.create_checkout_session
+        redirect_to session.url, allow_other_host: true
+        # If payment is successful, update invoice and order
+        if session.payment_status == "paid"
+          # Proceed with payment confirmation
+          @invoice.update(invoice_status: "Paid")
+          @order.update(status: "Completed")
+        end
+      else
+        session = Stripe::Checkout::Session.retrieve(@invoice.stripe_checkout_session_id)
+        if session.payment_status == "paid"
+          # Proceed with payment confirmation
+          @invoice.update(invoice_status: "Paid")
+          @order.update(status: "Completed")
+          redirect_to orders_path
+          flash[:notice] = "Order has already been paid for!}"
+        else
+          redirect_to session.url, allow_other_host: true
+        end
+      end
+    end
+  end
+
+
 
   def new
     @order = Order.new

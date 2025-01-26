@@ -20,6 +20,8 @@ class StripeCheckoutService
           },
         ],
         mode: 'payment',
+        success_url: "http://localhost:3000/orders",
+        cancel_url: "http://localhost:3000/orders"
       })
 
         @invoice.update!(stripe_checkout_session_id: session.id) # Store the session ID for tracking
