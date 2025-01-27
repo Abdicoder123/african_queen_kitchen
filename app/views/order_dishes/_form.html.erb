@@ -16,17 +16,17 @@
     </div>
   <% end %>
 <h3> Add a Dish! </h3>
-<div>
-  <%= form.label :dish_id, "Dish" %>
-  <%= form.collection_select(:dish_id, Dish.all, :id, :title) %>
-</div>
-<div>
-  <%= form.label :quantity %>
-  <%= form.number_field :quantity, min: 1 %>
-</div>
-
 <div class="mb-3">
-    <%= form.submit "Add a Dish" %>
-</div>
+    <%= form.label :dish_id, "Dish", class: "form-label" %>
+    <%= form.collection_select(:dish_id, Dish.all, :id, :title, { prompt: "Select a dish" }, class: "form-select") %>
+  </div>
 
+  <div class="mb-3">
+    <%= form.label :quantity, class: "form-label" %>
+    <%= form.number_field :quantity, min: 1, class: "form-control" %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.submit "Add a Dish", class: "btn btn-primary" %>
+  </div>
 <% end %>
