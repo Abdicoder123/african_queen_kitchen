@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_01_22_043219) do
+ActiveRecord::Schema[7.2].define(version: 2025_01_27_155643) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -26,6 +26,34 @@ ActiveRecord::Schema[7.2].define(version: 2025_01_22_043219) do
     t.index ["author_type", "author_id"], name: "index_active_admin_comments_on_author"
     t.index ["namespace"], name: "index_active_admin_comments_on_namespace"
     t.index ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource"
+  end
+
+  create_table "active_storage_attachments", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "record_type", null: false
+    t.bigint "record_id", null: false
+    t.bigint "blob_id", null: false
+    t.datetime "created_at", null: false
+    t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
+    t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
+  end
+
+  create_table "active_storage_blobs", force: :cascade do |t|
+    t.string "key", null: false
+    t.string "filename", null: false
+    t.string "content_type"
+    t.text "metadata"
+    t.string "service_name", null: false
+    t.bigint "byte_size", null: false
+    t.string "checksum"
+    t.datetime "created_at", null: false
+    t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
+  end
+
+  create_table "active_storage_variant_records", force: :cascade do |t|
+    t.bigint "blob_id", null: false
+    t.string "variation_digest", null: false
+    t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
   create_table "admin_users", force: :cascade do |t|
@@ -45,7 +73,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_01_22_043219) do
     t.string "title"
     t.text "description"
     t.string "image_url"
-    t.integer "price"
+    t.decimal "price", precision: 8, scale: 2
     t.string "customizable"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -53,13 +81,17 @@ ActiveRecord::Schema[7.2].define(version: 2025_01_22_043219) do
 
   create_table "invoices", force: :cascade do |t|
     t.bigint "order_id"
-    t.date "invoice_date"
-    t.date "due_date"
     t.decimal "total_amount"
     t.string "invoice_status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "stripe_invoice_id"
+    t.string "currency"
+    t.text "description"
+    t.bigint "user_id"
+    t.string "stripe_checkout_session_id"
     t.index ["order_id"], name: "index_invoices_on_order_id"
+    t.index ["user_id"], name: "index_invoices_on_user_id"
   end
 
   create_table "menus", force: :cascade do |t|
@@ -89,7 +121,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_01_22_043219) do
     t.string "status"
     t.text "event_details"
     t.integer "group_size"
-    t.integer "total_cost"
+    t.decimal "total_cost", precision: 10, scale: 2
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_orders_on_user_id"
@@ -125,10 +157,13 @@ ActiveRecord::Schema[7.2].define(version: 2025_01_22_043219) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "stripe_customer_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "order_dishes", "dishes"
   add_foreign_key "order_dishes", "orders"
   add_foreign_key "orders", "users"

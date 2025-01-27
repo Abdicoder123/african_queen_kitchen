@@ -1,0 +1,46 @@
+<% @menus.each do |menu| %>
+  <h2 class="section-title"><%= menu.title %></h2>
+  
+  <!-- Display Menu Images -->
+  <% if menu.images.attached? %>
+    <div class="menu-images">
+      <% menu.images.each do |image| %>
+        <%= image_tag image, class: "menu-image" %>
+      <% end %>
+    </div>
+  <% else %>
+    <p>No images available for this menu.</p>
+  <% end %>
+
+  <div class="dishes-grid">
+    <% @dishes.each do |dish| %>
+      <% if dish.menu_id == menu.id %>
+        <div class="dish-item menu-card">
+          <% if dish.images.attached? %>
+            <div class="dish-images">
+              <% dish.images.each do |image| %>
+                <%= image_tag image, class: "menu-card-img-top" %>
+              <% end %>
+            </div>
+            <% if dish.image.attached? %>
+            <%= image_tag dish.image, class: "menu-card-img-top" %>
+          <% end %>
+          <% elsif dish.image.attached? %>
+          <%= image_tag dish.image, class: "menu-card-img-top" %>
+            <% end %>
+
+          <h3 class="menu-card-title"><%= dish.title %></h3>
+          <p>$<%= dish.price %></p>
+          <p class="menu-card-description"><%= dish.description %></p>
+          <% if dish.customizable.present? %>
+            <p class="menu-card-description"><%= dish.customizable %></p>
+          <% end %>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+
+  <br>
+  <hr>
+  <br>
+<% end %>

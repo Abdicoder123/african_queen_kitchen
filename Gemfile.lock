@@ -388,7 +388,7 @@ PLATFORMS
 DEPENDENCIES
   activeadmin
   bootsnap
-  bootstrap (~> 5.2, >= 5.2.3)
+  bootstrap (~> 5.3)
   brakeman
   capybara
   debug
