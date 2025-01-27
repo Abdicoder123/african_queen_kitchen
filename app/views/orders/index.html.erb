@@ -1,15 +1,55 @@
 <h1>Order History</h1>
-
-<div> 
-    <% @orders.each do |order| %>
-        <%= render order %>
-        <% if order.status === 'Order Creation' %>
-            <p><%= link_to "Continue to create my order", edit_order_path(order) %></p>
-        <% else %>
-            <p><%= link_to "Show this order", order%></p>
+<div class="container mt-5">
+  <div class="row row-cols-1 row-cols-md-4 g-4"> 
+    <!-- Orders Creation Column -->
+    <div class="col">
+      <h3>Finish Creating Orders</h3>
+      <% @orders.each do |order| %>
+        <% if order.status == "Order Creation" %>
+          <div class="order-card shadow-lg mb-3">
+            <%= render order %>
+              <p><%= link_to "Continue to create my order", edit_order_path(order), class: "btn btn-primary" %><p>
+          </div>
         <% end %>
+      <% end %>
+    </div>
+    <!-- Pending Orders Column -->
+    <div class="col">
+      <h3>Pending Orders</h3>
+      <% @orders.each do |order| %>
+        <% if order.status == "Pending" %>
+          <div class="order-card shadow-lg mb-3">
+            <%= render order %>
+              <p><%= link_to "Show this order", order, class: "btn btn-warning" %></p>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
 
-    <% end %> 
+    <!-- Confirmed Orders Column -->
+    <div class="col">
+      <h3>Confirmed Orders (Pay now)</h3>
+      <% @orders.each do |order| %>
+        <% if order.status == "Confirmed" %>
+          <div class="order-card shadow-lg mb-3">
+            <%= render order %>
+              <p><%= link_to "Continue to Pay", order, class: "btn btn-success" %></p>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+
+    <!-- Completed Orders Column -->
+    <div class="col">
+      <h3>Completed Orders</h3>
+      <% @orders.each do |order| %>
+        <% if order.status == "Completed" %>
+          <div class="order-card shadow-lg mb-3">
+            <%= render order %>
+              <p><%= link_to "Show this order", order, class: "btn btn-secondary" %></p>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
 </div>
-
-<p><%= link_to "New Order", new_order_path %></p>
