@@ -1,0 +1,52 @@
+/* Footer Styling */
+footer {
+    background-color: #343a40; /* Bootstrap dark background */
+    color: #f8f9fa; /* Bootstrap light text */
+    padding: 1.5rem 0;
+    margin-top: 3rem;
+  }
+  
+  footer h5 {
+    color: #ffd700; /* Gold for section titles */
+    font-weight: bold;
+  }
+  
+  footer p {
+    font-size: 0.875rem; /* Small font for descriptions */
+    margin-bottom: 1rem;
+  }
+  
+  footer .list-unstyled {
+    padding-left: 0;
+  }
+  
+  footer .list-unstyled li {
+    margin-bottom: 0.5rem;
+  }
+  
+  footer .text-light {
+    color: #f8f9fa !important; /* Ensure consistent light text */
+  }
+  
+  footer .text-warning {
+    color: #ffd700 !important; /* Gold color for accents */
+  }
+  
+  footer .text-decoration-none {
+    text-decoration: none;
+  }
+  
+  footer .text-decoration-none:hover {
+    text-decoration: underline;
+  }
+  
+  footer hr {
+    border: none;
+    height: 2px;
+    background-color: #ffd700; /* Gold horizontal line */
+  }
+  
+  footer p.mb-0 {
+    font-size: 0.75rem; /* Small font for copyright notice */
+  }
+  
