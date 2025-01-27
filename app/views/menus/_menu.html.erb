@@ -22,9 +22,13 @@
                 <%= image_tag image, class: "menu-card-img-top" %>
               <% end %>
             </div>
-          <% elsif dish.admin_user&.image&.attached? %>
-            <%= image_tag dish.admin_user.image, class: "menu-card-img-top" %>
+            <% if dish.image.attached? %>
+            <%= image_tag dish.image, class: "menu-card-img-top" %>
           <% end %>
+          <% elsif dish.image.attached? %>
+          <%= image_tag dish.image, class: "menu-card-img-top" %>
+            <% end %>
+
           <h3 class="menu-card-title"><%= dish.title %></h3>
           <p>$<%= dish.price %></p>
           <p class="menu-card-description"><%= dish.description %></p>
