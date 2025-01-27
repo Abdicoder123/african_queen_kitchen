@@ -60,8 +60,8 @@ dishes = Dish.create!([
 
 # Create sample orders
 orders = Order.create!([
-  { user_id: 1, delivery_date: '2025-01-25', status: 'Pending', event_details: 'Office catering', group_size: 30, total_cost: 450.00 },
-  { user_id: 1, delivery_date: '2025-01-26', status: 'Confirmed', event_details: 'Birthday party', group_size: 20, total_cost: 300.00 }
+  { user_id: 9, delivery_date: '2025-01-25', status: 'Pending', event_details: 'Office catering', group_size: 30, total_cost: 450.00 },
+  { user_id: 9, delivery_date: '2025-01-26', status: 'Confirmed', event_details: 'Birthday party', group_size: 20, total_cost: 300.00 }
 ])
 
 # Create sample order items (OrderDish)
