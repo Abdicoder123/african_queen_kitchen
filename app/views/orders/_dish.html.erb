@@ -1,14 +1,22 @@
 <!-- This div contains the dish name, quantity, 
 and the total price (price of dish * quantity) -->
 
-<div>
-  <% @order_dishes.each do |dish| %>
-    <li>
-      Dish name: <%= dish.dish.title %>
-    </li>
-    <li>
-      Quantity: <%= dish.quantity %>
-    </li>
-  <% end %>
+<div class="container mt-4">
+  <ul class="list-group">
+    <% @order_dishes.each do |dish| %>
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        <div>
+          <strong>Dish Name:</strong> <%= dish.dish.title %>
+        </div>
+        <div>
+          <strong>Quantity:</strong> <%= dish.quantity %>
+        </div>
+        <div>
+        <span class="badge bg-primary"><strong>Total Cost:</strong> <%= dish.price %></span>
+        </div>
+      </li>
+    <% end %>
+  </ul>
 </div>
+
 
