@@ -8,7 +8,6 @@ class StripeCheckoutService
         session = Stripe::Checkout::Session.create({
         payment_method_types: [ "card" ],
         customer: @user.stripe_customer_id,
-        invoice: @invoice.stripe_invoice_id,
         line_items: [
           {
             price_data: {
@@ -23,6 +22,9 @@ class StripeCheckoutService
           }
         ],
         mode: "payment",
+        payment_intent_data: {
+          invoice: @invoice.stripe_invoice_id, # Links the payment to the invoice
+        },
         success_url: "http://localhost:3000",
         cancel_url: "http://localhost:3000"
       })
