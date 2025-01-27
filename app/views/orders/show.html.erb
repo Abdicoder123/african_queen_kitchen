@@ -1,14 +1,35 @@
-<h1>Order Page</h1>
+<div class="container mt-5">
+    <h1 class="text-center mb-4">Order Page</h1> <hr>
+    <!-- Renders order details -->
+    <div class="card shadow-sm mb-4">
+        <div class="card-body">
+        <%= render @order %>
+        </div>
+    </div>
 
-<!-- Renders order details -->
-<%= render @order %>
+    <hr>
+    <h3 class="text-center mb-4">Dishes in this Order</h3>
 
-<h2>Dishes in this Order</h2>
+    <!-- Renders the dishes in the order -->
+    <div class="row row-cols-1 row-cols-md-2 g-4">
+        <%= render 'dish' %>
+    </div>
 
-<!-- Renders the dishes in the order -->
-<%= render 'dish' %>
+    <% if @invoice.invoice_status == "Payment Pending" && @order.status != "canceled" %>
+        <div class="text-center mt-4">
+        <%= link_to "Pay Now", pay_path(@order), class: "btn btn-success btn-lg" %>
+        </div>
+    <% elsif @invoice.invoice_status == "Paid" %>
+        <div class="alert alert-success mt-4 text-center" role="alert">
+        This order has been completed!
+        </div>
+    <% else @invoice.invoice_status == "Payment Pending" %>
+    <div class="alert alert-warning mt-4 text-center" role="alert">
+        This order has been cancelled. Thank you for your understanding.
+    </div>
+  <% end %>
+ 
+  
+</div>
 
-<% if @invoice.invoice_status == "Payment Pending" %>
-    <p><%= link_to "Pay Now", pay_path(@order)%></p>
-<% end %>
 
