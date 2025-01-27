@@ -4,12 +4,6 @@
     display: grid;
   }
 
-.card {
-    border: none;
-    padding: 1rem;
-    border-radius:0px !important;
-}
-
 .info-card {
     align-self: center;
 }
@@ -17,3 +11,68 @@
 @media (min-width: 600px) {
     .cards { grid-template-columns: repeat(2, 1fr); }
   }
+
+/* Scrollable container for the cards section */
+.scrollable-container {
+  max-height: 50vh; /* Limit the container height to 50% of the viewport height */
+  overflow-y: auto;  /* Enable vertical scrolling if content exceeds max-height */
+  padding: 20px;
+  width: 100%; /* Ensure the container spans the entire width */
+}
+
+/* Adjust the layout for the cards section */
+.cards.container {
+  display: grid;
+  grid-template-columns: 1fr; /* Use full width for each card */
+  gap: 20px;
+  padding: 0; /* Remove extra padding */
+  width: 100%; /* Ensure full width */
+  height: 100%; /* Ensure full height inside the container */
+}
+
+/* Individual Card Styles */
+.card {
+  background-color: #fff;
+  border: 1px solid var(--primary-color);
+  border-radius: 10px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  text-align: center;
+  width: 100%; /* Ensure each card takes full width */
+  height: auto; /* Card height will now depend on image size */
+  display: flex;
+  flex-direction: column;
+}
+
+/* Card Images */
+.card img {
+  width: 100%;
+  height: auto;
+  max-height: 500px; /* Set a max-height for images to avoid excessive stretching */
+}
+
+/* Card Information Section */
+.info-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 15px;
+  text-align: center;
+  height: auto; /* Information section adjusts based on the image height */
+  flex-grow: 1;
+}
+
+/* Button Styles */
+.btn-primary {
+  background-color: var(--secondary-color);
+  color: #4b0082;
+  border: none;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.btn-primary:hover {
+  background-color: var(--primary-color);
+  color: #fff;
+}
