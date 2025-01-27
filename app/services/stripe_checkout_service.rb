@@ -22,9 +22,6 @@ class StripeCheckoutService
           }
         ],
         mode: "payment",
-        payment_intent_data: {
-          invoice: @invoice.stripe_invoice_id, # Links the payment to the invoice
-        },
         success_url: "http://localhost:3000",
         cancel_url: "http://localhost:3000"
       })
