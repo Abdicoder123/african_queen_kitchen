@@ -2,9 +2,11 @@
 This partial is used in the order index and order show views -->
 
 <p id="status" class="mb-3">
+
     <span class="badge <%= order.status == 'Confirmed' ? 'bg-success' : order.status == 'Pending' ? 'bg-warning' : order.status == 'Completed' ? 'bg-secondary' : 'bg-primary' %>">
         <strong>Status:</strong>
         <%= order.status %>
+
     </span>
 
 </p>
@@ -13,6 +15,7 @@ This partial is used in the order index and order show views -->
     <strong>This order was created on:</strong>
     <span class="text-muted"><%= order.created_at.strftime("%B %d, %Y") %></span>
 </p>
+
 
 <p class="mb-3">
     <strong>Delivery Date:</strong>
