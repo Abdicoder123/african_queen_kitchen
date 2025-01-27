@@ -6,20 +6,23 @@ ActiveAdmin.register Order do
     order = Order.find(params[:id]) # Fetch the order from params
     invoice = order.invoice # Access the invoice associated with the order
 
-    # Check if the invoice exists
+    # Check if the invoice exists in the database
     if invoice
       stripe_invoice_id = invoice.stripe_invoice_id # Fetch the Stripe invoice ID
-      Rails.logger.debug "XXXXXXXXXXXXXXXX: #{stripe_invoice_id}"
-      service = FetchInvoiceService.new(stripe_invoice_id) # Call your service to fetch invoice details
+      service = FetchInvoiceService.new(stripe_invoice_id) # Call service to fetch invoice details
       result = service.fetch_invoice
       totalInDollars = result.amount_due / 100
 
       if result
+        # Send the invoice email to the user associated with this invoice
+        # Finalize the invoice so it gets sent out
+        Stripe::Invoice.finalize_invoice(stripe_invoice_id)
+
         # Update the invoice and order with the fetched data
         invoice.update(invoice_status: "Payment Pending", total_amount: totalInDollars)
         order.update(status: "Confirmed", total_cost: totalInDollars)
 
-        flash[:notice] = "Invoice and order updated successfully."
+        flash[:notice] = "Invoice and order are now official!"
       else
         flash[:alert] = "Failed to fetch invoice details."
       end

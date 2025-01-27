@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_01_24_174846) do
+ActiveRecord::Schema[7.2].define(version: 2025_01_26_222933) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -45,7 +45,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_01_24_174846) do
     t.string "title"
     t.text "description"
     t.string "image_url"
-    t.integer "price"
+    t.decimal "price", precision: 8, scale: 2
     t.string "customizable"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -61,6 +61,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_01_24_174846) do
     t.string "currency"
     t.text "description"
     t.bigint "user_id"
+    t.string "stripe_checkout_session_id"
     t.index ["order_id"], name: "index_invoices_on_order_id"
     t.index ["user_id"], name: "index_invoices_on_user_id"
   end
@@ -92,7 +93,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_01_24_174846) do
     t.string "status"
     t.text "event_details"
     t.integer "group_size"
-    t.integer "total_cost"
+    t.decimal "total_cost", precision: 10, scale: 2
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_orders_on_user_id"
