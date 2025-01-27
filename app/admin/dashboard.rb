@@ -39,7 +39,7 @@ ActiveAdmin.register_page "Dashboard" do
           table_for Order.order(created_at: :desc).limit(5) do
             column(:id)
             column(:user)
-            column(:total_price)
+            column(:status)
           end
           div { link_to "View All Orders", admin_orders_path }
         end

@@ -20,10 +20,6 @@ class CreateInvoiceService
     if stripe_invoice
       create_invoice_items(stripe_invoice)
       save_invoice(user, stripe_invoice)
-
-      # Send the invoice email to the user associated with this invoice
-      # Finalize the invoice so it gets sent out
-      Stripe::Invoice.finalize_invoice(stripe_invoice.id)
     end
   end
 
@@ -31,13 +27,14 @@ class CreateInvoiceService
   def create_invoice_items(stripe_invoice)
     # Create InvoiceItems for each dish in the order
     @order_dishes.each do |order_dish_item|
-      unitPrice = order_dish_item.dish.price # Stripe operates in cents. $1 = 100 cents
-      unitPrice *= 100
+      float_unitPrice = order_dish_item.dish.price # Stripe operates in cents. $1 = 100 cents
+      float_unitPrice *= 100
+      integer_unitPrice = float_unitPrice.to_i
       invoiceId = stripe_invoice.id # Grab the invoice id
       invoiceItem = Stripe::InvoiceItem.create({
         customer: stripe_invoice.customer,
         description: order_dish_item.dish.title, # Name of the dish
-        unit_amount: unitPrice, # Price of individual dish in cents
+        unit_amount: integer_unitPrice, # Price of individual dish in cents
         currency: "usd",
         quantity: order_dish_item.quantity, # Quantity of the dish
         invoice: invoiceId

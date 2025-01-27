@@ -1,0 +1,20 @@
+<% @menus.each do |menu| %>
+    <h2 class="section-title"><%= menu.title %></h2>
+    <div class="dishes-grid">
+      <% @dishes.each do |dish| %>
+        <% if dish.menu_id == menu.id %>
+          <div class="dish-item menu-card">
+            <h3 class="menu-card-title"><%= dish.title %></h3>
+            <p>$<%= dish.price %></p>
+            <p class="menu-card-description"><%= dish.description %></p>
+            <% if dish.customizable.present? %>
+                <p class="menu-card-description"><%= dish.customizable %>
+            <% end %>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+    <br>
+    <hr>
+    <br>
+<% end %>
