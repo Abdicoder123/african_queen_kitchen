@@ -93,7 +93,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_01_25_235342) do
     t.string "status"
     t.text "event_details"
     t.integer "group_size"
-    t.integer "total_cost"
+    t.decimal "total_cost"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_orders_on_user_id"
