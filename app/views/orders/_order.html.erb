@@ -1,10 +1,9 @@
 <!-- This partial helps display information related to the order.
 This partial is used in the order index and order show views -->
 <p id="status" class="mb-3">
-    <strong>Status:</strong>
-    <span class="badge 
-      <%= order.status == 'Confirmed' ? 'bg-success' : order.status == 'Pending' ? 'bg-warning' : order.status == 'Completed' ? 'bg-secondary' : 'bg-primary' %>">
-      <%= order.status %>
+    <span class="badge <%= order.status == 'Confirmed' ? 'bg-success' : order.status == 'Pending' ? 'bg-warning' : order.status == 'Completed' ? 'bg-secondary' : 'bg-primary' %>">
+        <strong>Status:</strong>
+        <%= order.status %>
     </span>
 </p>
 
