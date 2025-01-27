@@ -9,7 +9,7 @@ class OrdersController < ApplicationController
     # Use the retrieved sessions to update your invoices
     sessions.each do |session|
       invoice = Invoice.find_by(stripe_checkout_session_id: session.id)
-      if invoice
+      if invoice && session.payment_status == "paid"
         update_payment(invoice, session)
       end
     end
@@ -29,12 +29,12 @@ class OrdersController < ApplicationController
 
     # Redirect to stripe checkout session logic
     if @invoice.invoice_status === "Payment Pending" && @order.status == "Confirmed"
-      if @invoice.stripe_checkout_session_id.blank?
+      if @invoice.stripe_checkout_session_id.blank? #Checks if a checkout already exists for that invoice
         service = StripeCheckoutService.new(@invoice, @user)
         session = service.create_checkout_session
         redirect_to session.url, allow_other_host: true
       else
-        fetch_checkout_session
+        fetch_checkout_session  #If a checkout already exists
       end
     end
   end
@@ -118,13 +118,11 @@ class OrdersController < ApplicationController
   end
 
   def fetch_checkout_session
+    # Retrieve the existing session
     session = Stripe::Checkout::Session.retrieve(@invoice.stripe_checkout_session_id)
-    if session.payment_status == "paid"
-      # Proceed with payment confirmation
-      update_payment(session)
-      redirect_to orders_path
-      flash[:notice] = "Order has already been paid for!"
-    end
+    
+    # Redirect the user to the existing session's URL
+    redirect_to session.url, allow_other_host: true
   end
 
   def order_params
