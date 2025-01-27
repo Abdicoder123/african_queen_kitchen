@@ -37,7 +37,10 @@ ActiveAdmin.register Order do
   index do
     panel "Order Overview" do
       div do
-        h3 "Manage and accept your orders"
+        h3 "Manage and accept your orders here!" 
+        h3 "Click 'View' to see the details of an order and click 'Edit' to manually
+        edit the status of the order."
+        h3 "Click 'Accept Order' when you are ready to accept an order."
       end
     end
 
@@ -50,7 +53,7 @@ ActiveAdmin.register Order do
     column :total_price
     column :created_at
     column :updated_at
-
+    actions # to show the view and edit actions
     # Define the Actions column
     column "Actions" do |order|
       # Check if the order is still Pending
@@ -65,18 +68,59 @@ ActiveAdmin.register Order do
   actions :all, except: [ :new, :create, :destroy ]
 
   show do
+    panel "Order Actions" do
+      div do
+        h3 "In the upper right corner of this page, there is an 'Edit Order' button. Upon clicking it, you
+        can manually change the status of an order."
+      end
+    end
     attributes_table do
       row :id
       row :user
+      row :email do |record|
+        record.user&.email
+      end
       row :total_price
       row :status
       row :created_at
       row :updated_at
     end
+
+    panel "Dishes in this Order" do
+      if order.dishes.any?
+        table_for order.dishes do
+          column :id
+          column :title
+          column :quantity do |order|
+            order.order_dishes.where(order_id: order.id).map { |order_dish| order_dish.quantity }
+          end
+          column :price 
+          column :total_price
+        end
+      else
+        div do
+          "No dishes have been added to this order."
+        end
+      end
+    end
+
     active_admin_comments
   end
 
   form do |f|
+    panel "Order Details" do
+      attributes_table_for f.object do
+        row :id
+        row :user 
+        row :email do |record|
+          record.user&.email
+        end
+        row :total_price
+        row :status
+        row :created_at
+        row :updated_at
+      end
+    end
     f.inputs "Update Order Status" do
       f.input :status, as: :select, collection: %w[pending confirmed shipped completed canceled], include_blank: false
     end
