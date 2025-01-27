@@ -1,6 +1,9 @@
 <!-- This partial helps display information related to the order.
 This partial is used in the order index and order show views -->
-
+<p id="status">
+    <strong>Status:</strong>
+    <%= order.status %>
+</p>
 <p>
       <strong>This order was created on:</strong>
       <%= order.created_at.strftime("%B %d, %Y") %>
@@ -9,11 +12,6 @@ This partial is used in the order index and order show views -->
 <p>
       <strong>Delivery Date:</strong>
       <%= order.delivery_date.strftime("%B %d, %Y") %>
-</p>
-
-<p>
-    <strong>Status:</strong>
-    <%= order.status %>
 </p>
 <p>
     <strong>Details:</strong>

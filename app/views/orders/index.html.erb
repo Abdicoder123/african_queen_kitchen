@@ -6,7 +6,7 @@
       <h3>Pending Orders</h3>
       <% @orders.each do |order| %>
         <% if order.status == "Pending" %>
-          <div class="menu-card shadow-lg mb-3">
+          <div class="order-card shadow-lg mb-3">
             <%= render order %>
             <% if order.status == 'Order Creation' %>
               <p><%= link_to "Continue to create my order", edit_order_path(order) %><p>
@@ -23,7 +23,7 @@
       <h3>Confirmed Orders (Pay now)</h3>
       <% @orders.each do |order| %>
         <% if order.status == "Confirmed" %>
-          <div class="menu-card shadow-lg mb-3">
+          <div class="order-card shadow-lg mb-3">
             <%= render order %>
             <% if order.status == 'Order Creation' %>
               <%= link_to "Continue to create my order", edit_order_path(order) %>
@@ -40,7 +40,7 @@
       <h3>Completed Orders</h3>
       <% @orders.each do |order| %>
         <% if order.status == "Completed" %>
-          <div class="menu-card shadow-lg mb-3">
+          <div class="order-card shadow-lg mb-3">
             <%= render order %>
             <% if order.status == 'Order Creation' %>
               <p><%= link_to "Continue to create my order", edit_order_path(order) %></p>
