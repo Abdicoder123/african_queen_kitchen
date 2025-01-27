@@ -6,26 +6,21 @@
       <h3>Finish Creating Orders</h3>
       <% @orders.each do |order| %>
         <% if order.status == "Order Creation" %>
-          <div class="order-card shadow-lg mb-3 p-3">
+          <div class="order-card shadow-lg mb-3">
             <%= render order %>
-            <p>
-              <%= link_to "Continue to create my order", edit_order_path(order), class: "btn btn-primary" %>
-            </p>
+              <p><%= link_to "Continue to create my order", edit_order_path(order), class: "btn btn-primary" %><p>
           </div>
         <% end %>
       <% end %>
     </div>
-
     <!-- Pending Orders Column -->
     <div class="col">
       <h3>Pending Orders</h3>
       <% @orders.each do |order| %>
         <% if order.status == "Pending" %>
-          <div class="order-card shadow-lg mb-3 p-3">
+          <div class="order-card shadow-lg mb-3">
             <%= render order %>
-            <p>
-              <%= link_to "Show this order", order, class: "btn btn-warning" %>
-            </p>
+              <p><%= link_to "Show this order", order, class: "btn btn-warning" %></p>
           </div>
         <% end %>
       <% end %>
@@ -36,11 +31,9 @@
       <h3>Confirmed Orders (Pay now)</h3>
       <% @orders.each do |order| %>
         <% if order.status == "Confirmed" %>
-          <div class="order-card shadow-lg mb-3 p-3">
+          <div class="order-card shadow-lg mb-3">
             <%= render order %>
-            <p>
-              <%= link_to "Pay now", edit_order_path(order), class: "btn btn-success" %>
-            </p>
+              <p><%= link_to "Continue to Pay", order, class: "btn btn-success" %></p>
           </div>
         <% end %>
       <% end %>
@@ -51,16 +44,12 @@
       <h3>Completed Orders</h3>
       <% @orders.each do |order| %>
         <% if order.status == "Completed" %>
-          <div class="order-card shadow-lg mb-3 p-3">
+          <div class="order-card shadow-lg mb-3">
             <%= render order %>
-            <p>
-              <%= link_to "Show this order", order, class: "btn btn-secondary" %>
-            </p>
+              <p><%= link_to "Show this order", order, class: "btn btn-secondary" %></p>
           </div>
         <% end %>
       <% end %>
     </div>
   </div>
 </div>
-
-
