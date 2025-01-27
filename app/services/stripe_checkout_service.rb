@@ -8,6 +8,7 @@ class StripeCheckoutService
         session = Stripe::Checkout::Session.create({
         payment_method_types: [ "card" ],
         customer: @user.stripe_customer_id,
+        invoice: @invoice
         line_items: [
           {
             price_data: {
