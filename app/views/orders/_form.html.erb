@@ -1,25 +1,23 @@
 <!-- This is the form that starts off orders -->
-
-
-<%= form_with(model: @order, local: true) do |form| %>
-  <div>
-    <%= form.label :delivery_date %>
-    <%= form.date_field :delivery_date %>
+<%= form_with(model: @order, local: true, class: "needs-validation") do |form| %>
+  <div class="mb-3">
+    <%= form.label :delivery_date, "Delivery Date", class: "form-label" %>
+    <%= form.date_field :delivery_date, class: "form-control" %>
   </div>
 
-
-  <div>
-    <%= form.label :event_details, "Event Details" %>
-    <%= form.text_area :event_details %>
+  <div class="mb-3">
+    <%= form.label :event_details, "Event Details", class: "form-label" %>
+    <%= form.text_area :event_details, class: "form-control", rows: 4 %>
   </div>
 
-  <div>
-    <%= form.label :group_size, "Group Size" %>
-    <%= form.number_field :group_size, min: 1 %>
+  <div class="mb-3">
+    <%= form.label :group_size, "Group Size", class: "form-label" %>
+    <%= form.number_field :group_size, min: 1, class: "form-control" %>
   </div>
 
   <div>
-    <%= form.submit button_text %>
+    <%= form.submit button_text, class: "btn btn-primary" %>
   </div>
-  <% end %>
+<% end %>
+
   
