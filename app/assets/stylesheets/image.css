@@ -1,5 +1,21 @@
+/* General Image Styling */
 img {
-    border-radius: 8px;
-    margin: 5px;
+    border-radius: 8px; /* Optional: Adds rounded corners */
+    margin: 5px;        /* Space around images */
+  }
+  
+  /* Styling for Dish Images */
+  .menu-card-img-top {
+    width: 150px;       /* Set a fixed width */
+    height: auto;       /* Maintain aspect ratio */
+    object-fit: cover;  /* Ensures images fill the space without distortion */
+  }
+  
+  /* Styling for Menu Images */
+  .menu-image {
+    width: 300px;       /* Larger size for menu images */
+    height: auto;       /* Maintain aspect ratio */
+    object-fit: cover;  /* Ensures images fill the space without distortion */
+    margin-bottom: 10px; /* Add some spacing below menu images */
   }
   

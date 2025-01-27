@@ -2,6 +2,7 @@ class MenusController < ApplicationController
   def index
     @menus = Menu.all
     @dishes = Dish.all
+    
   end
 
   def show
