@@ -1,0 +1,31 @@
+<footer class="bg-dark text-light py-4 mt-5">
+    <div class="container text-center">
+      <div class="row">
+        <div class="col-md-4">
+          <h5 class="text-warning">About Us</h5>
+          <p class="small">
+            African Queen Kitchen specializes in delicious, healthy, and halal Somali food for all occasions.
+          </p>
+        </div>
+        <div class="col-md-4">
+          <h5 class="text-warning">Quick Links</h5>
+          <ul class="list-unstyled">
+            <li><%= link_to "Home", root_path, class: "text-decoration-none text-light" %></li>
+            <li><%= link_to "Menu", "#", class: "text-decoration-none text-light" %></li>
+            <li><%= link_to "Contact Us", "#", class: "text-decoration-none text-light" %></li>
+          </ul>
+        </div>
+        <div class="col-md-4">
+          <h5 class="text-warning">Contact</h5>
+          <p class="small">
+            Phone: (612) 245-6625<br>
+            Email: <a href="mailto:info@aqkitchenmn.com" class="text-light">info@aqkitchenmn.com</a><br>
+            Address: P.O. Box 8854, Minneapolis, MN 55408
+          </p>
+        </div>
+      </div>
+      <hr class="bg-warning">
+      <p class="mb-0 small">&copy; <%= Time.now.year %> African Queen Kitchen. All Rights Reserved.</p>
+    </div>
+  </footer>
+  <%= stylesheet_link_tag "footer", media: "all", "data-turbo-track": "reload" %>
