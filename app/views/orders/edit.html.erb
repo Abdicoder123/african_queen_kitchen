@@ -1,18 +1,33 @@
-<h1>Order Continuation</h1>
-<h3>Dishes in this Order</h3>
+<h1>Order Continuation</h1> <hr>
+<h3> Manage your Dishes!</h3>
 
-<!-- Renders the dishes in the order -->
-<%= render 'dish' %>
+<div class="container mt-4">
+  <div class="card shadow-lg">
+    <div class="card-body">
+      <div class="row">
+        <!-- Dishes Column -->
+        <div class="col-md-6">
+          <h3>Dishes in this Order</h3>
+          <!-- Render dishes -->
+          <%= render 'dish' %>
+        </div>
+        
+      
+        <!-- Order Dishes Form Column -->
+        <div class="col-md-6">
+          <% if @order.status == 'Order Creation' %>
+            <%= render 'order_dishes/form', order: @order %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
-<!-- Users can only add dishes to their orders if the status of their order is "Order Creation" -->
-<% if @order.status === 'Order Creation' %>
-    <%= render 'order_dishes/form', order: @order %>
-    <p>
-      <%= button_to "Delete Order", @order, method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger btn-sm" %>
-    </p>
-<% end %>
 
-<h3>Edit Order Details</h3>
+
+<hr>
+<h3>Edit your Order Details</h3>
 
 <!-- Renders order details -->
 <%= render 'form', button_text: "Submit Order" %>
