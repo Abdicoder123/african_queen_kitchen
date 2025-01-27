@@ -1,13 +1,13 @@
 class Dish < ApplicationRecord
     belongs_to :menu
     belongs_to :admin_user
-  
+
     has_many :order_dishes, dependent: :destroy
     has_many :orders, through: :order_dishes
     has_many_attached :images
     # Change from has_many_attached to has_one_attached for a single image
     has_one_attached :image
-  
+
     # Define ransackable attributes
     def self.ransackable_attributes(auth_object = nil)
       [
@@ -22,7 +22,7 @@ class Dish < ApplicationRecord
         "updated_at"
       ]
     end
-  
+
     # Define ransackable associations
     def self.ransackable_associations(auth_object = nil)
       [
@@ -31,5 +31,4 @@ class Dish < ApplicationRecord
         "orders"
       ]
     end
-  end
-  
+end
