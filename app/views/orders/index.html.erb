@@ -1,15 +1,56 @@
 <h1>Order History</h1>
-
-<div> 
-    <% @orders.each do |order| %>
-        <%= render order %>
-        <% if order.status === 'Order Creation' %>
-            <p><%= link_to "Continue to create my order", edit_order_path(order) %></p>
-        <% else %>
-            <p><%= link_to "Show this order", order%></p>
+<div class="container mt-5">
+  <div class="row g-4"> 
+    <!-- Pending Orders Column -->
+    <div class="col-md-4">
+      <h3>Pending Orders</h3>
+      <% @orders.each do |order| %>
+        <% if order.status == "Pending" %>
+          <div class="menu-card shadow-lg mb-3">
+            <%= render order %>
+            <% if order.status == 'Order Creation' %>
+              <p><%= link_to "Continue to create my order", edit_order_path(order) %><p>
+            <% else %>
+              <p><%= link_to "Show this order", order %></p>
+            <% end %>
+          </div>
         <% end %>
+      <% end %>
+    </div>
 
-    <% end %> 
+    <!-- Confirmed Orders Column -->
+    <div class="col-md-4">
+      <h3>Confirmed Orders (Pay now)</h3>
+      <% @orders.each do |order| %>
+        <% if order.status == "Confirmed" %>
+          <div class="menu-card shadow-lg mb-3">
+            <%= render order %>
+            <% if order.status == 'Order Creation' %>
+              <%= link_to "Continue to create my order", edit_order_path(order) %>
+            <% else %>
+              <p><%= link_to "Show this order", order %></p>
+            <% end %>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+
+    <!-- Completed Orders Column -->
+    <div class="col-md-4">
+      <h3>Completed Orders</h3>
+      <% @orders.each do |order| %>
+        <% if order.status == "Completed" %>
+          <div class="menu-card shadow-lg mb-3">
+            <%= render order %>
+            <% if order.status == 'Order Creation' %>
+              <p><%= link_to "Continue to create my order", edit_order_path(order) %></p>
+            <% else %>
+              <p><%= link_to "Show this order", order %></p>
+            <% end %>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
 </div>
 
-<p><%= link_to "New Order", new_order_path %></p>
