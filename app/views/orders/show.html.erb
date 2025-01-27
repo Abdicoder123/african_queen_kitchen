@@ -23,10 +23,14 @@
         <div class="alert alert-success mt-4 text-center" role="alert">
         This order has been completed!
         </div>
-    <% else @invoice.invoice_status == "Payment Pending" %>
-    <div class="alert alert-warning mt-4 text-center" role="alert">
-        This order has been cancelled. Thank you for your understanding.
-    </div>
+    <% elsif @invoice.invoice_status == "draft" %>
+        <div class="alert alert-warning mt-4 text-center" role="alert">
+            Thanks for ordering! Please check back in "My Orders" tab to see if your order has been accepted. Approval usually takes around 2 to 3 business days
+        </div>
+    <% else  %>
+        <div class="alert alert-warning mt-4 text-center" role="alert">
+            This order has been cancelled. Thank you for your understanding.
+        </div>
   <% end %>
  
   
