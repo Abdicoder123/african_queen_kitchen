@@ -1,11 +1,13 @@
 class StripeCheckoutService
-    def initialize(invoice)
+    def initialize(invoice, user)
+      @user = user
       @invoice = invoice
     end
 
     def create_checkout_session
         session = Stripe::Checkout::Session.create({
-        payment_method_types: [ "card" ], # You can add other payment methods like Apple Pay, Google Pay
+        payment_method_types: [ "card" ],
+        customer: @user.stripe_customer_id,
         line_items: [
           {
             price_data: {
@@ -20,8 +22,8 @@ class StripeCheckoutService
           }
         ],
         mode: "payment",
-        success_url: "http://localhost:3000/orders",
-        cancel_url: "http://localhost:3000/orders"
+        success_url: "http://localhost:3000",
+        cancel_url: "http://localhost:3000"
       })
 
         @invoice.update!(stripe_checkout_session_id: session.id) # Store the session ID for tracking

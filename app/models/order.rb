@@ -2,14 +2,15 @@ class Order < ApplicationRecord
     belongs_to :user
     has_many :order_dishes, dependent: :destroy
     has_many :dishes, through: :order_dishes
-    has_one :invoice
+    has_one :invoice, dependent: :destroy
+    has_one :payment, dependent: :destroy
 
     validates :delivery_date, presence: true
     validates :event_details, presence: true
     validates :group_size, presence: true
 
     def self.ransackable_associations(auth_object = nil)
-        [ "dishes", "order_dishes", "user", "invoice" ]
+        [ "dishes", "order_dishes", "user", "invoice", "payment" ]
     end
 
     def self.ransackable_attributes(auth_object = nil)
