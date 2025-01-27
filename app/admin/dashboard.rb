@@ -4,7 +4,6 @@ ActiveAdmin.register_page "Dashboard" do
   menu priority: 1, label: proc { I18n.t("active_admin.dashboard") }
 
   content title: proc { I18n.t("active_admin.dashboard") } do
-
     panel "African Queen Kitchen's Admin Dashboard Overview" do
       div do
         h3 "This is where you can access all your menus, dishes, orders, and invoices."
@@ -55,7 +54,6 @@ ActiveAdmin.register_page "Dashboard" do
           div { link_to "View All Dishes", admin_dishes_path }
         end
       end
-
     end
   end
 end

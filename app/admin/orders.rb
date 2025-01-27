@@ -37,7 +37,7 @@ ActiveAdmin.register Order do
   index do
     panel "Order Overview" do
       div do
-        h3 "Manage and accept your orders here!" 
+        h3 "Manage and accept your orders here!"
         h3 "Click 'View' to see the details of an order and click 'Edit' to manually
         edit the status of the order."
         h3 "Click 'Accept Order' when you are ready to accept an order."
@@ -94,7 +94,7 @@ ActiveAdmin.register Order do
           column :quantity do |order|
             order.order_dishes.where(order_id: order.id).map { |order_dish| order_dish.quantity }
           end
-          column :price 
+          column :price
           column :total_price
         end
       else
@@ -111,7 +111,7 @@ ActiveAdmin.register Order do
     panel "Order Details" do
       attributes_table_for f.object do
         row :id
-        row :user 
+        row :user
         row :email do |record|
           record.user&.email
         end

@@ -4,7 +4,7 @@ ActiveAdmin.register Dish do
   index do
     panel "Dish Overview" do
       div do
-        h3 "This is where all of your dishes are!" 
+        h3 "This is where all of your dishes are!"
         h3 "You can view, edit and delete every dish as you see fit by clicking the respective links."
         h3 "Upon clicking edit, you can edit any information you need to."
         h3 "In the upper right corner, you can click 'New Dish' to create new dishes you want to add and even select which menu they belong to."
@@ -32,5 +32,5 @@ ActiveAdmin.register Dish do
       row :created_at
       row :updated_at
     end
-  end 
+  end
 end

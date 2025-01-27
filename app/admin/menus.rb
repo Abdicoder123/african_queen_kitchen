@@ -4,7 +4,7 @@ ActiveAdmin.register Menu do
   index do
     panel "Menu Overview" do
       div do
-        h3 "This is where all of your active menus are!" 
+        h3 "This is where all of your active menus are!"
         h3 "You can view, edit and delete your menus as you see fit by clicking the respective links."
         h3 "Upon clicking edit, you can toggle whether or not a menu is active as well as add a description."
         h3 "In the upper right corner, you can click 'New Menu' to create new menus you want to add."
