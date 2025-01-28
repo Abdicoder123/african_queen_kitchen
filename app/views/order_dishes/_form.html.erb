@@ -15,7 +15,7 @@
       </ul>
     </div>
   <% end %>
-<h3> Add a Dish! </h3>
+<h3> Add this dish to your order! </h3>
 <div class="mb-3">
     <%= form.label :dish_id, "Dish", class: "form-label" %>
     <%= form.collection_select(:dish_id, Dish.all, :id, :title, { prompt: "Select a dish" }, class: "form-select") %>

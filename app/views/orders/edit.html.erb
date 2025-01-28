@@ -34,9 +34,8 @@
    <!-- Pop-Up Modal -->
   <div id="popupModal">
     <div id="modalContent">
-      <h2 class="text-xl font-bold mb-4" id="modalTitle">Pop-Up Content</h2>
-      <p class="text-gray-600 mb-6" id="modalContent">This is the default pop-up content.</p>
-      <button id="closeModal" class="absolute top-2 right-2 text-gray-500 hover:text-gray-800">
+      <%= render 'order_dishes/form', order: @order %>
+      <button id="closeModal" >
         ✖
       </button>
     </div>
