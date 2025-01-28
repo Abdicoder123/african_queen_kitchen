@@ -121,8 +121,6 @@ ActiveAdmin.register Order do
         end
       end
     end
-
-    active_admin_comments
   end
 
   form do |f|
@@ -148,7 +146,7 @@ ActiveAdmin.register Order do
         h3 "Confirmed - means you have confirmed the order for the customer."
         h3 "Completed - means that the customer has successfully paid for their order."
         h3 "Cancelled - means that you have politely declined the customer's order."
-        h3 "Note: it may say 'pending' in the changeable form below, but if you don't want to change the status simply click 'cancel'."
+        h3 "Note: it may say 'pending' in the changeable form below as default, but if you don't want to change the status simply click 'cancel'."
       end
     end
     f.inputs "Update Order Status" do
