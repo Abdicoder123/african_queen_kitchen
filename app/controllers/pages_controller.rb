@@ -3,3 +3,6 @@ class PagesController < ApplicationController
     end    
   end
   
+        render partial: "pages/about"
+      end
+end
