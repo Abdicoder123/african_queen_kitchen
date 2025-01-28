@@ -5,6 +5,7 @@
     <% @menus.each do |menu| %>
       <a class="p-2 text-muted" href='#<%= menu.title.parameterize %>'><%= menu.title %></a>
     <% end %>
+    <a class="p-2 text-muted" href='#submit'>Submit Order</a>
   </div>
 </div> <hr>
 
@@ -15,7 +16,7 @@
         
       <!-- Dishes Column -->
         <div class="col">
-          <h3>Dishes in this Order:</h3>
+          <h2>Dishes in this Order:</h2>
           <!-- Render dishes -->
           <%= render 'dish' %>
         </div>
@@ -25,10 +26,14 @@
     </div>
   </div>
 </div>
-<hr>
+
+<br>
+<br>
+<br>
 
 <!-- Menus -->
 <div class="card shadow-lg p-5">
+  <h2>Click to add dishes to your order!</h2> <hr>
   <%= render 'menus/menu' %>
 
    <!-- Pop-Up Modal -->
@@ -41,14 +46,19 @@
     </div>
   </div>
 
-</div> <hr>
+</div> 
 
+<br>
+<br>
+<br>
 
 <!-- Renders order details -->
-<div class="card shadow-lg p-5">
-  <h3>Finalize and Submit Order</h3>
-  <%= render 'form', button_text: "Submit Order" %>
-</div>
+<section id="submit">
+  <div class="card shadow-lg p-5">
+    <h2>Finalize and Submit Order</h2>
+    <%= render 'form', button_text: "Submit Order" %>
+  </div>
+</section>
 
 <script>
 
@@ -60,8 +70,6 @@
       card.addEventListener("click", () => {
         // Show the pop-up
         popupModal.style.display = "block"
-        console.log("Im being clicked")
-       
       });
     });
 
