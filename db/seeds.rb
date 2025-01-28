@@ -15,6 +15,12 @@ Dish.destroy_all
 Order.destroy_all
 OrderDish.destroy_all
 
+if Rails.env.development?
+  puts "Creating AdminUser..."
+  AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password')
+  puts "AdminUser created."
+end
+
 # Create sample menus
 menus = Menu.create!([
   { title: 'Appetizers' },
@@ -33,7 +39,7 @@ dishes = Dish.create!([
   { menu_id: menus[1].id, title: 'Lentil Soup', description: "This creamy soup is prepared with garlic, onion, cilantro, tomatoes, red pepper, and African Queens' special mix", price: 5.95 },
   { menu_id: menus[1].id, title: 'Chicken Soup', description: "Made with potatoes, carrots, onion, tomatoes, garlic and cilantro, then delicately spiced for a hearty, savory soup", price: 6.95 },
   { menu_id: menus[1].id, title: 'Goat Soup', description: "A broth-based soup with cabbage, potato, carrots, onion, garlic, tomatoes, green onion, japaleño, and mouth-watering spices", price: 7.95 },
-  { menu_id: menus[1].id, title: 'Garden Salad', description: "A refreshing mix of lettuce, tomatoes, red onion, carrots and mixed pepper with choice of dressing.", customizable: "Add-ons available: chicken breast, steak or tuna", price: 9.95 },
+  { menu_id: menus[1].id, title: 'Garden Salad', d escription: "A refreshing mix of lettuce, tomatoes, red onion, carrots and mixed pepper with choice of dressing.", customizable: "Add-ons available: chicken breast, steak or tuna", price: 9.95 },
   { menu_id: menus[2].id, title: 'Philly Sandwich', description: "Steak or chicken, served with sauteed onion mixed and provolone on french bread with your choice of lettuce, tomatoes, mayo and pickles", price: 9.95 },
   { menu_id: menus[2].id, title: 'Fish Sandwich', description: "Steak or chicken, served with sauteed onion mixed and provolone on french bread with your choice of lettuce, tomatoes, mayo and pickles", price: 10.95 },
   { menu_id: menus[2].id, title: 'African Queens Wrap', description: 'Build-your-own: Choose a tortilla, whole wheat or spinach wrap to pile with your favorite fillings:', customizable: 'chicken, beef, fish, spinach, beans, green pepper, brown rice, tomatoes, onion, cheese (blue, pepper jack, mozzarella, and provolone), and your choice of sauce.', price: 10.95 },
@@ -58,20 +64,35 @@ dishes = Dish.create!([
   { menu_id: menus[5].id, title: 'Smoothie', description: 'Choose from mango, strawberry, peach, wild berry, banana, pineapple, or papaya.', price: 9.00 }
 ])
 
+# Attach images based on the dish title
+dishes.each do |dish|
+  # Clean the dish title to match the image file naming convention (e.g., 'Sambosas' -> 'sambosas')
+  image_filename = dish.title.downcase.gsub(' ', '_') + '.jpg'  # or '.png' depending on your images
+
+  # Define the path to the image (assuming images are in the 'dishes_images' folder in the root of the project)
+  image_path = Rails.root.join('dishes_images', image_filename)
+
+  if File.exist?(image_path)
+    dish.image.attach(io: File.open(image_path), filename: image_filename, content_type: 'image/jpg')
+    puts "Attached image for #{dish.title}"
+  else
+    puts "Image for #{dish.title} not found at #{image_path}"
+  end
+end
+
 # Create sample orders
 orders = Order.create!([
-  { user_id: 9, delivery_date: '2025-01-25', status: 'Pending', event_details: 'Office catering', group_size: 30, total_cost: 450.00 },
-  { user_id: 9, delivery_date: '2025-01-26', status: 'Confirmed', event_details: 'Birthday party', group_size: 20, total_cost: 300.00 }
+  { user_id: 4, delivery_date: '2025-01-25', status: 'Pending', event_details: 'Office catering', group_size: 30, total_cost: 450.00 },
+  { user_id: 4, delivery_date: '2025-01-26', status: 'Confirmed', event_details: 'Birthday party', group_size: 20, total_cost: 300.00 }
 ])
 
 # Create sample order items (OrderDish)
 OrderDish.create!([
   { order_id: orders[0].id, dish_id: dishes[0].id, quantity: 10, price: 125.00 },
-  { order_id: orders[1].id, dish_id: dishes[1].id, quantity: 5, price: 43.75 }
+  { order_id: orders[0].id, dish_id: dishes[1].id, quantity: 5, price: 43.75 }
 ])
 
 
 
 
 
-AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
