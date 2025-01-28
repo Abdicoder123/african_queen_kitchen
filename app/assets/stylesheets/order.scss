@@ -1,3 +1,22 @@
+/* Initially hidden */
+#popupModal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Position fixed on the screen */
+    top: 0;          /* Position at the top of the screen */
+    left: 0;         /* Position at the left of the screen */
+    width: 100%;     /* Take up full width */
+    height: 100%;    /* Take up full height */
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent dark background */
+    z-index: 1000;   /* Make sure it's on top of other content */
+}
+
+#modalContent{
+    position: relative;
+    background-color: white;
+    top: 50%;
+    width: 50%;
+    transform: translate(50%, -50%)
+}
 
 
  

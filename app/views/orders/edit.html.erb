@@ -19,10 +19,7 @@
           <!-- Render dishes -->
           <%= render 'dish' %>
         </div>
-        
-      
-
-
+  
 
       </div>
     </div>
@@ -35,8 +32,8 @@
   <%= render 'menus/menu' %>
 
    <!-- Pop-Up Modal -->
-  <div id="popupModal" class="fixed inset-0 bg-gray-800 bg-opacity-50 hidden flex items-center justify-center z-50">
-    <div class="bg-white w-96 p-6 rounded-lg shadow-lg relative">
+  <div id="popupModal">
+    <div id="modalContent">
       <h2 class="text-xl font-bold mb-4" id="modalTitle">Pop-Up Content</h2>
       <p class="text-gray-600 mb-6" id="modalContent">This is the default pop-up content.</p>
       <button id="closeModal" class="absolute top-2 right-2 text-gray-500 hover:text-gray-800">
@@ -63,20 +60,21 @@
   shadowCards.forEach((card) => {
       card.addEventListener("click", () => {
         // Show the pop-up
-        popupModal.classList.remove("hidden");
+        popupModal.style.display = "block"
         console.log("Im being clicked")
+       
       });
     });
 
     // Hide the pop-up when clicking the close button
     closeModal.addEventListener("click", () => {
-      popupModal.classList.add("hidden");
+      popupModal.style.display = "none";
     });
 
     // Hide the pop-up when clicking outside the modal content
     popupModal.addEventListener("click", (e) => {
       if (e.target === popupModal) {
-        popupModal.classList.add("hidden");
+         popupModal.style.display = "none";
       }
     });
 
