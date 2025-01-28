@@ -16,7 +16,7 @@
         
       <!-- Dishes Column -->
         <div class="col">
-          <h2>Dishes in this Order:</h2>
+          <h2 class="order-header">Dishes in this Order:</h2>
           <!-- Render dishes -->
           <%= render 'dish' %>
         </div>
@@ -33,7 +33,7 @@
 
 <!-- Menus -->
 <div class="card shadow-lg p-5">
-  <h2>Click to add dishes to your order!</h2> <hr>
+  <h2 class="order-header">Click to add dishes to your order!</h2> <hr>
   <%= render 'menus/menu' %>
 
    <!-- Pop-Up Modal -->
@@ -55,7 +55,7 @@
 <!-- Renders order details -->
 <section id="submit">
   <div class="card shadow-lg p-5">
-    <h2>Finalize and Submit Order</h2>
+    <h2 class="order-header">Finalize and Submit Order</h2>
     <%= render 'form', button_text: "Submit Order" %>
   </div>
 </section>
