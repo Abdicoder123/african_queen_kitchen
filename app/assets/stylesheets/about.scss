@@ -1,99 +1,74 @@
-.about-page {
-  background-color: #2e1a47; // Rich purple background
-  color: #fff;
-  display: flex;
-  flex-direction: column;
-  min-height: calc(100vh - 80px); // Ensure full page height minus footer height
-  justify-content: space-between; // Aligns content properly
-  length: 100%; // Ensures full page height
-
-  .page-title {
-    font-size: 3rem;
-    font-weight: bold;
-    color: #f4c430; // Gold
-    margin-top: 2rem;
-  }
-
-  .page-subtitle {
-    font-size: 1.5rem;
-    font-style: italic;
-    color: #a77bca; // Light purple
-    margin-bottom: 1.5rem;
-  }
-
-  .separator {
-    border: 0;
-    height: 3px;
-    background-color: #f4c430; // Gold
-    width: 50%;
-    margin: 1rem auto;
-  }
-
-  .section-title {
-    font-size: 2rem;
-    font-weight: bold;
-    margin-bottom: 1rem;
-    color: #f4c430; // Gold
-  }
-
-  .founder-section {
-    margin-bottom: 2rem;
-
-    .founder-img {
-      width: 150px;
-      height: 150px;
-      border-radius: 50%;
-      object-fit: cover;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-      margin-bottom: 1rem;
-    }
-  }
-
-  .values-section {
-    margin-bottom: 2rem;
-
-    .values-list {
-      list-style: none;
-      padding: 0;
-
-      li {
-        font-size: 1.2rem;
-        margin: 0.5rem 0;
-        padding-left: 1rem;
-        position: relative;
-
-        &::before {
-          content: "•";
-          color: #f4c430; // Gold
-          position: absolute;
-          left: 0;
-          font-size: 1.5rem;
-          line-height: 1.2;
-        }
-      }
-    }
-  }
-
-  .history-section,
-  .mission-section,
-  .accomplishments-section {
-    margin-bottom: 2rem;
-
-    p {
-      font-size: 1.1rem;
-      line-height: 1.6;
-      margin-bottom: 1rem;
-    }
-  }
-}
-
-// Ensure the footer attaches to the bottom seamlessly
+/* Global Styles */
 body {
-  margin: 0; // Removes browser default margin
-  padding: 0; // Removes browser default padding
-  
+  background-color: #2e1030 !important; // Deep purple background to match branding
+  font-family: 'Poppins', sans-serif; // Sets a clean and modern font
+  text-align: center; // Ensures all text is centered
 }
 
-footer {
-  margin-top: 0; // Eliminates spacing between the about page and footer
+/* Color Styles */
+.text-gold {
+  color: #FFD700; // Gold color used for headings and accents
+}
+
+.text-purple {
+  color: #D4AF37; // Alternative gold shade for subtitle
+}
+
+.text-light {
+  color: #ffffff; // Makes all body text white for readability
+  font-size: 1.2rem; // Increases readability with larger text size
+}
+
+/* Page Title Styles */
+.page-title {
+  font-size: 2.5rem; // Makes the main title prominent
+  font-weight: bold;
+}
+
+/* Section Titles */
+.section-title {
+  font-size: 2rem; // Keeps section titles distinct and readable
+  font-weight: 600;
+  text-align: center; // Ensures section titles are centered
+  padding-bottom: 10px;
+  width: 100%;
+  border-bottom: none !important; // Removes unwanted short border
+}
+
+/* Custom Separator for Section Titles */
+h2::after {
+  content: ""; // Creates a decorative separator under each section title
+  display: block;
+  width: 80px;
+  height: 4px;
+  background-color: #FFD700; // Gold separator for consistency
+  margin: 10px auto 0 auto; // Centers the separator with spacing
+}
+
+/* Main Separator for Sections */
+.separator {
+  width: 80px;
+  height: 4px;
+  background-color: #FFD700; // Gold bar to separate main sections
+  margin: 30px auto; // Provides spacing to avoid clutter
+}
+
+/* Layout Container */
+.about-container {
+  max-width: 900px; // Ensures content stays within a readable width
+  margin: auto; // Centers the container on the page
+  text-align: center;
+}
+
+/* Founder Image Styling */
+.founder-img {
+  border-radius: 50%; // Makes the image circular for a polished look
+  max-width: 250px; // Increases size for better visibility
+  margin-bottom: 20px;
+}
+
+/* Paragraph Styling for Key Sections */
+.values-section p,
+.accomplishments-section p {
+  margin-bottom: 10px; // Ensures consistency in paragraph spacing
 }
