@@ -1,5 +1,4 @@
 ActiveAdmin.register Review do
-
   # See permitted parameters documentation:
   # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
   #
@@ -14,7 +13,7 @@ ActiveAdmin.register Review do
   #   permitted << :other if params[:action] == 'create' && current_user.admin?
   #   permitted
   # end
-  
+
   # Show only admin users can delete reviews
   permit_params :rating, :comment, :user_id
 
@@ -45,7 +44,4 @@ ActiveAdmin.register Review do
       super # This calls the default ActiveAdmin destroy action
     end
   end
-  
-  
-  
 end
