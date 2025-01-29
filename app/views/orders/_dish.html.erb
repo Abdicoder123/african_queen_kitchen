@@ -3,20 +3,28 @@ and the total price (price of dish * quantity) -->
 
 <div class="container mt-4">
   <ul class="list-group">
-    <% @order_dishes.each do |dish| %>
+    <% @order_dishes.each do |order_dish| %>
       <li class="list-group-item d-flex justify-content-between align-items-center">
         <div>
-          <strong>Dish Name:</strong> <%= dish.dish.title %>
+          <strong>Dish Name:</strong> <%= order_dish.dish.title %>
         </div>
+
         <div>
-          <strong>Quantity:</strong> <%= dish.quantity %>
+          <strong>Quantity:</strong> <%= order_dish.quantity %>
         </div>
+
         <div>
-        <span class="badge bg-primary"><strong>Total Cost:</strong> <%= dish.price %></span>
+          <span class="badge bg-primary"><strong>Total Cost:</strong> <%= order_dish.price %></span>
+        </div>
+
+        <div>
+          <!-- Delete Button -->
+          <%= button_to "Delete", [order_dish.order, order_dish], method: :delete, data: { confirm: "Are you sure you want to delete this dish?" } %>
         </div>
       </li>
     <% end %>
   </ul>
 </div>
+
 
 
