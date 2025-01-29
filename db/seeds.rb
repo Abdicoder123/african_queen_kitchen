@@ -66,10 +66,9 @@ dishes = Dish.create!([
 
 # Attach images based on the dish title
 dishes.each do |dish|
-  # Clean the dish title to match the image file naming convention (e.g., 'Sambosas' -> 'sambosas')
-  image_filename = dish.title.downcase.gsub(' ', '_') + '.jpg'  # or '.png' depending on your images
+  image_filename = dish.title.downcase.gsub(' ', '_') + '.jpg'
 
-  # Define the path to the image (assuming images are in the 'dishes_images' folder in the root of the project)
+
   image_path = Rails.root.join('app/assets/images/Dishes', image_filename)
 
   if File.exist?(image_path)
@@ -91,8 +90,3 @@ OrderDish.create!([
   { order_id: orders[0].id, dish_id: dishes[0].id, quantity: 10, price: 125.00 },
   { order_id: orders[0].id, dish_id: dishes[1].id, quantity: 5, price: 43.75 }
 ])
-
-
-
-
-
