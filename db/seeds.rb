@@ -58,17 +58,9 @@ dishes = Dish.create!([
   { menu_id: menus[5].id, title: 'Smoothie', description: 'Choose from mango, strawberry, peach, wild berry, banana, pineapple, or papaya.', price: 9.00 }
 ])
 
-# Create sample orders
-orders = Order.create!([
-  { user_id: 9, delivery_date: '2025-01-25', status: 'Pending', event_details: 'Office catering', group_size: 30, total_cost: 450.00 },
-  { user_id: 9, delivery_date: '2025-01-26', status: 'Confirmed', event_details: 'Birthday party', group_size: 20, total_cost: 300.00 }
-])
 
-# Create sample order items (OrderDish)
-OrderDish.create!([
-  { order_id: orders[0].id, dish_id: dishes[0].id, quantity: 10, price: 125.00 },
-  { order_id: orders[1].id, dish_id: dishes[1].id, quantity: 5, price: 43.75 }
-])
+
+
 
 
 
