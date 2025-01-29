@@ -15,6 +15,7 @@
     <link rel="apple-touch-icon" href="/icon.png">
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
   </head>
 
   <body>
@@ -30,6 +31,7 @@
 
     <div class="main-content container">
       <%= yield %>
+      <%= yield :javascript %>
     </div>
 
     <%= render 'layouts/footer' %>
