@@ -34,7 +34,7 @@ class OrdersController < ApplicationController
     # Redirect to stripe checkout session logic
     if @invoice.invoice_status === "Payment Pending" && @order.status == "Confirmed"
       stripe_invoice = Stripe::Invoice.retrieve(@invoice.stripe_invoice_id)
-      redirect_to stripe_invoice.hosted_invoice_url, allow_other_host:true
+      redirect_to stripe_invoice.hosted_invoice_url, allow_other_host: true
     end
   end
 
@@ -105,7 +105,7 @@ class OrdersController < ApplicationController
 
   private
 
-  def update_payment(invoice, stripe_invoice )
+  def update_payment(invoice, stripe_invoice)
     # Make sure you find the associated order based on the invoice
     order = invoice.order
     if order
