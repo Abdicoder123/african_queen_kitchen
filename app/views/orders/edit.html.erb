@@ -65,11 +65,17 @@
   const shadowCards = document.querySelectorAll(".dish-item.menu-card");
   const popupModal = document.getElementById("popupModal");
   const closeModal = document.getElementById("closeModal");
+  const dishSelect = document.getElementById("dishSelect");
 
   shadowCards.forEach((card) => {
       card.addEventListener("click", () => {
         // Show the pop-up
         popupModal.style.display = "block"
+        const dishId = card.getAttribute("data-dish-id");
+
+        if (dishId) {
+          dishSelect.value = dishId; // Set the dropdown value
+        }
       });
     });
 

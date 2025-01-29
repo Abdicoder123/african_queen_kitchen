@@ -16,7 +16,7 @@
     <div class="dishes-grid">
       <% @dishes.each do |dish| %>
         <% if dish.menu_id == menu.id %>
-          <div class="dish-item menu-card">
+          <div class="dish-item menu-card" data-dish-id="<%= dish.id %>">
             <% if dish.images.attached? %>
               <div class="dish-images">
                 <% dish.images.each do |image| %>
