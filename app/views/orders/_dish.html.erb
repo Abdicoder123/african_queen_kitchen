@@ -19,7 +19,9 @@ and the total price (price of dish * quantity) -->
 
         <div>
           <!-- Delete Button -->
-          <%= button_to "Delete", [order_dish.order, order_dish], method: :delete, data: { confirm: "Are you sure you want to delete this dish?" } %>
+          <% if @order.status == "Order Creation" %>
+            <%= button_to "Delete", [order_dish.order, order_dish], method: :delete, data: { confirm: "Are you sure you want to delete this dish?" } %>
+          <% end %>
         </div>
       </li>
     <% end %>
