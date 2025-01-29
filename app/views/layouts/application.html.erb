@@ -19,7 +19,7 @@
 
   <body>
     <%= render "layouts/nav" %>
-    
+
     <% if notice %>
       <div class="alert alert-success"><%= notice %></div>
     <% end %>
@@ -27,14 +27,11 @@
     <% if alert %>
       <div class="alert alert-danger"><%= alert %></div>
     <% end %>
-    
-    <div class="container">
+
+    <div class="main-content container">
       <%= yield %>
     </div>
 
+    <%= render 'layouts/footer' %>
   </body>
-
-  <%= render 'layouts/footer' %>
-
-
 </html>
