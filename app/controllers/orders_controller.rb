@@ -4,7 +4,8 @@ class OrdersController < ApplicationController
     @orders = current_user.orders.order(created_at: :desc)
 
     @orders.each do |order|
-      if order.invoice && order.invoice.stripe_invoice_id
+      # If the invoice exists in the database and there is a stripe invoice id
+      if order.invoice && order.invoice.stripe_invoice_id && order.status != "Cancelled"
         stripe_invoice_id = order.invoice.stripe_invoice_id
         invoice = order.invoice
         stripe_invoice = Stripe::Invoice.retrieve(stripe_invoice_id)
