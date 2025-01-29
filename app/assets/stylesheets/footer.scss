@@ -1,0 +1,83 @@
+/* Sticky Footer Fix */
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.main-content {
+  flex: 1; /* Pushes the footer to the bottom */
+}
+
+/* Footer Styling */
+.footer {
+  background-color: #343a40; /* Bootstrap dark background */
+  color: #f8f9fa; /* Bootstrap light text */
+  padding: 1.5rem 0;
+  margin-top: auto; /* Ensures footer stays at the bottom */
+  border-top: 3px solid #ffd700; /* Gold border for better separation */
+  text-align: center; /* Ensures all content in footer is centered */
+  width: 100%; /* Full width */
+}
+
+/* Section Titles */
+.footer-title {
+  color: #ffd700; /* Gold for section titles */
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 1.25rem; /* Increased font size */
+  margin-bottom: 1rem;
+}
+
+/* Footer Text */
+.footer-text {
+  font-size: 1rem; /* Increased font size */
+  margin-bottom: 1rem;
+  line-height: 1.6; /* Improved readability */
+  color: #f8f9fa; /* Ensure text is visible */
+}
+
+/* Footer Links */
+.footer-links {
+  padding-left: 0;
+  margin: 0;
+  list-style: none; /* Remove default bullets */
+  text-align: center; /* Ensures links are centered */
+}
+
+.footer-links li {
+  margin-bottom: 0.75rem; /* Increased spacing */
+}
+
+/* Link Styling */
+.footer-link {
+  color: #f8f9fa; /* Light text */
+  font-size: 1rem; /* Increased font size */
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-link:hover {
+  text-decoration: underline;
+  color: #ffd700; /* Gold hover effect */
+}
+
+/* Divider */
+.footer-divider {
+  border: none;
+  height: 2px;
+  background-color: #ffd700; /* Gold horizontal line */
+  margin: 1.5rem 0;
+}
+
+/* Copyright Notice */
+.footer-copyright {
+  font-size: 0.875rem; /* Slightly larger copyright text */
+  text-align: center;
+  margin-top: 1rem;
+  width: 100%; /* Ensures full-width centering */
+  display: block; /* Ensures proper centering */
+  color: #f8f9fa;
+}

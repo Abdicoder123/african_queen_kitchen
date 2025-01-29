@@ -63,6 +63,8 @@ class OrdersController < ApplicationController
   def edit
     @order = Order.find(params[:id])
     @order_dishes = @order.order_dishes
+    @menus = Menu.all
+    @dishes = Dish.all
   end
 
   def update
