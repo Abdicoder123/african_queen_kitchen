@@ -24,8 +24,17 @@ ActiveAdmin.register Review do
     column :user
     column :rating
     column :comment
-    actions # Show default actions (View, Edit, Delete)
+    actions # Show default actions (Only View and Delete)
+
+    panel "Review Overview" do
+      div do
+        h3 "Here is where all the reviews that your customers write!"
+        h3 "You can view reviews and delete unwanted reviews"
+      end
+    end
   end
+
+  actions :all, except: [ :new, :create, :edit ]
 
   # You can customize the form where new reviews are created/edited
   form do |f|
