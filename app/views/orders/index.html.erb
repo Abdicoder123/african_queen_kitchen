@@ -43,7 +43,7 @@
     <div class="col">
       <h3>Completed Orders</h3>
       <% @orders.each do |order| %>
-        <% if order.status == "Completed" %>
+        <% if order.status == "Completed" || order.status == "Cancelled" %>
           <div class="order-card shadow-lg mb-3">
             <%= render order %>
               <p><%= link_to "Show this order", order, class: "btn btn-secondary" %></p>
