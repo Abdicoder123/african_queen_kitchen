@@ -202,7 +202,7 @@ ActiveAdmin.register Order do
       end
     end
     f.inputs "Update Order Status" do
-      f.input :status, as: :select, collection: %w[Pending Confirmed Shipped Completed Cancelled], include_blank: true
+      f.input :status, as: :select, collection: %w[Pending Confirmed Shipped Completed Cancelled], include_blank: false
     end
     f.actions
   end
