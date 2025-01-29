@@ -17,7 +17,7 @@
     <div class="col">
       <h3>Pending Orders</h3>
       <% @orders.each do |order| %>
-        <% if order.status == "Pending" || order.status == "Cancelled" %>
+        <% if order.status == "Pending"%>
           <div class="order-card shadow-lg mb-3">
             <%= render order %>
               <p><%= link_to "Show this order", order, class: "btn btn-warning" %></p>
