@@ -33,13 +33,13 @@ menus = Menu.create!([
 
 # Create sample dishes associated with menus
 dishes = Dish.create!([
-  { menu_id: menus[0].id, title: 'Sambosas', description: 'Also known as samosas, a crispy pastry that comes in 9 varieties', customizable: 'Options Available: beef, chicken, tuna, shrimp, potatos, lentils, spinach, mixed vegetables, and cream cheese coconut with raisins', price: 1.75 },
+  { menu_id: menus[0].id, title: 'Sambosa', description: 'Also known as samosas, a crispy pastry that comes in 9 varieties', customizable: 'Options Available: beef, chicken, tuna, shrimp, potatos, lentils, spinach, mixed vegetables, and cream cheese coconut with raisins', price: 1.75 },
   { menu_id: menus[0].id, title: 'Chicken Wings', description: 'Deep fried with BBQ and Buffalo sauces, 6pcs', price: 8.95 },
   { menu_id: menus[0].id, title: 'Bhajiya', description: "Made with black-eyed peas, onion, garlic, and African Queens' own special mixture, soaked overnight and flash-fried for a delicious and traditional starter", price: 1.50 },
   { menu_id: menus[1].id, title: 'Lentil Soup', description: "This creamy soup is prepared with garlic, onion, cilantro, tomatoes, red pepper, and African Queens' special mix", price: 5.95 },
   { menu_id: menus[1].id, title: 'Chicken Soup', description: "Made with potatoes, carrots, onion, tomatoes, garlic and cilantro, then delicately spiced for a hearty, savory soup", price: 6.95 },
   { menu_id: menus[1].id, title: 'Goat Soup', description: "A broth-based soup with cabbage, potato, carrots, onion, garlic, tomatoes, green onion, japaleño, and mouth-watering spices", price: 7.95 },
-  { menu_id: menus[1].id, title: 'Garden Salad', d escription: "A refreshing mix of lettuce, tomatoes, red onion, carrots and mixed pepper with choice of dressing.", customizable: "Add-ons available: chicken breast, steak or tuna", price: 9.95 },
+  { menu_id: menus[1].id, title: 'Garden Salad', description: "A refreshing mix of lettuce, tomatoes, red onion, carrots and mixed pepper with choice of dressing.", customizable: "Add-ons available: chicken breast, steak or tuna", price: 9.95 },
   { menu_id: menus[2].id, title: 'Philly Sandwich', description: "Steak or chicken, served with sauteed onion mixed and provolone on french bread with your choice of lettuce, tomatoes, mayo and pickles", price: 9.95 },
   { menu_id: menus[2].id, title: 'Fish Sandwich', description: "Steak or chicken, served with sauteed onion mixed and provolone on french bread with your choice of lettuce, tomatoes, mayo and pickles", price: 10.95 },
   { menu_id: menus[2].id, title: 'African Queens Wrap', description: 'Build-your-own: Choose a tortilla, whole wheat or spinach wrap to pile with your favorite fillings:', customizable: 'chicken, beef, fish, spinach, beans, green pepper, brown rice, tomatoes, onion, cheese (blue, pepper jack, mozzarella, and provolone), and your choice of sauce.', price: 10.95 },
@@ -70,7 +70,7 @@ dishes.each do |dish|
   image_filename = dish.title.downcase.gsub(' ', '_') + '.jpg'  # or '.png' depending on your images
 
   # Define the path to the image (assuming images are in the 'dishes_images' folder in the root of the project)
-  image_path = Rails.root.join('dishes_images', image_filename)
+  image_path = Rails.root.join('app/assets/images/Dishes', image_filename)
 
   if File.exist?(image_path)
     dish.image.attach(io: File.open(image_path), filename: image_filename, content_type: 'image/jpg')
