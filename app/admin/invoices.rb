@@ -6,6 +6,7 @@ ActiveAdmin.register Invoice do
       div do
         h3 "Here is where all of the invoices for orders are stored."
         h3 "Once you can confirm an order, an invoice is automatically created and will appear here."
+        h3 "The 'Order' column is a link to check the details of the order associatied with the invoice."
         h3 "This is the place you can refer to check if an order has been paid for."
         h3 "During 'Draft' the invoice will not yet amount to anything."
         h3 "If you cancel an order, the status will be 'Deleted'."
@@ -16,6 +17,9 @@ ActiveAdmin.register Invoice do
     column :id
     column :user
     column :stripe_invoice_id
+    column :order do |invoice|
+      order = invoice.order
+    end
     column :amount_due do |invoice|
       total = invoice.total_amount
       number_to_currency(total)
