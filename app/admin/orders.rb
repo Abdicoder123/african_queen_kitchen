@@ -45,14 +45,17 @@ ActiveAdmin.register Order do
     end
 
     selectable_column
-    id_column
     column :user
     column :delivery_date
     column :status
     column :group_size
-    column :total_price
+    column :total_price_of_order do |order|
+      total_order_price = order.order_dishes.sum do |order_dish|
+        order_dish.quantity * order_dish.dish.price
+      end
+      number_to_currency(total_order_price)
+    end
     column :created_at
-    column :updated_at
     actions # to show the view and edit actions
     # Define the Actions column
     column "Actions" do |order|
@@ -80,8 +83,15 @@ ActiveAdmin.register Order do
       row :email do |record|
         record.user&.email
       end
-      row :total_price
+      row :total_price do
+        total_order_price = order.order_dishes.sum do |order_dish|
+          order_dish.quantity * order_dish.dish.price
+        end
+        number_to_currency(total_order_price)
+      end
       row :status
+      row :event_details
+      row :delivery_date
       row :created_at
       row :updated_at
     end
@@ -91,11 +101,19 @@ ActiveAdmin.register Order do
         table_for order.dishes do
           column :id
           column :title
-          column :quantity do |order|
-            order.order_dishes.where(order_id: order.id).map { |order_dish| order_dish.quantity }
+          column :quantity do |dish|
+            order.order_dishes.find_by(dish_id: dish.id)&.quantity || "N/A"
           end
           column :price
-          column :total_price
+          column :total_price_of_dishes do |dish|
+            order_dish = order.order_dishes.find_by(dish_id: dish.id)
+            if order_dish
+              total = order_dish.quantity * dish.price
+              number_to_currency(total)
+            else
+              "N/A"
+            end
+          end
         end
       else
         div do
@@ -103,8 +121,6 @@ ActiveAdmin.register Order do
         end
       end
     end
-
-    active_admin_comments
   end
 
   form do |f|
@@ -119,6 +135,18 @@ ActiveAdmin.register Order do
         row :status
         row :created_at
         row :updated_at
+      end
+    end
+    panel "Order Status Note" do
+      div do
+        h3 "Manually changing the status of an order is helpful when cancelling the order but be mindful for other statuses."
+        h3 "Reminder for each status:"
+        h3 "Order Creation - means the customer has yet to finalized their order and should not be touched yet."
+        h3 "Pending - means the customer has submitted their order and is waiting to hear back from you."
+        h3 "Confirmed - means you have confirmed the order for the customer."
+        h3 "Completed - means that the customer has successfully paid for their order."
+        h3 "Cancelled - means that you have politely declined the customer's order."
+        h3 "Note: it may say 'pending' in the changeable form below as default, but if you don't want to change the status simply click 'cancel'."
       end
     end
     f.inputs "Update Order Status" do

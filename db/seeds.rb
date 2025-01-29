@@ -15,6 +15,12 @@ Dish.destroy_all
 Order.destroy_all
 OrderDish.destroy_all
 
+if Rails.env.development?
+  puts "Creating AdminUser..."
+  AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password')
+  puts "AdminUser created."
+end
+
 # Create sample menus
 menus = Menu.create!([
   { title: 'Appetizers' },
@@ -27,7 +33,7 @@ menus = Menu.create!([
 
 # Create sample dishes associated with menus
 dishes = Dish.create!([
-  { menu_id: menus[0].id, title: 'Sambosas', description: 'Also known as samosas, a crispy pastry that comes in 9 varieties', customizable: 'Options Available: beef, chicken, tuna, shrimp, potatos, lentils, spinach, mixed vegetables, and cream cheese coconut with raisins', price: 1.75 },
+  { menu_id: menus[0].id, title: 'Sambosa', description: 'Also known as samosas, a crispy pastry that comes in 9 varieties', customizable: 'Options Available: beef, chicken, tuna, shrimp, potatos, lentils, spinach, mixed vegetables, and cream cheese coconut with raisins', price: 1.75 },
   { menu_id: menus[0].id, title: 'Chicken Wings', description: 'Deep fried with BBQ and Buffalo sauces, 6pcs', price: 8.95 },
   { menu_id: menus[0].id, title: 'Bhajiya', description: "Made with black-eyed peas, onion, garlic, and African Queens' own special mixture, soaked overnight and flash-fried for a delicious and traditional starter", price: 1.50 },
   { menu_id: menus[1].id, title: 'Lentil Soup', description: "This creamy soup is prepared with garlic, onion, cilantro, tomatoes, red pepper, and African Queens' special mix", price: 5.95 },
@@ -58,12 +64,29 @@ dishes = Dish.create!([
   { menu_id: menus[5].id, title: 'Smoothie', description: 'Choose from mango, strawberry, peach, wild berry, banana, pineapple, or papaya.', price: 9.00 }
 ])
 
+# Attach images based on the dish title
+dishes.each do |dish|
+  image_filename = dish.title.downcase.gsub(' ', '_') + '.jpg'
 
 
+  image_path = Rails.root.join('app/assets/images/Dishes', image_filename)
 
+  if File.exist?(image_path)
+    dish.image.attach(io: File.open(image_path), filename: image_filename, content_type: 'image/jpg')
+    puts "Attached image for #{dish.title}"
+  else
+    puts "Image for #{dish.title} not found at #{image_path}"
+  end
+end
 
+# Create sample orders
+orders = Order.create!([
+  { user_id: 4, delivery_date: '2025-01-25', status: 'Pending', event_details: 'Office catering', group_size: 30, total_cost: 450.00 },
+  { user_id: 4, delivery_date: '2025-01-26', status: 'Confirmed', event_details: 'Birthday party', group_size: 20, total_cost: 300.00 }
+])
 
-
-
-
-AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
+# Create sample order items (OrderDish)
+OrderDish.create!([
+  { order_id: orders[0].id, dish_id: dishes[0].id, quantity: 10, price: 125.00 },
+  { order_id: orders[0].id, dish_id: dishes[1].id, quantity: 5, price: 43.75 }
+])
