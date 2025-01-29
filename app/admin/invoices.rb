@@ -23,5 +23,35 @@ ActiveAdmin.register Invoice do
     column :currency
     column :invoice_status
     column :created_at
+    actions
+  end
+
+  actions :index, :show
+
+  show do |invoice|
+    panel "Invoices Overview" do
+      div do
+        h3 "Here is another view of the invoice."
+        h3 "You can view the details of the order by clicking the link in the 'Order' row."
+      end
+    end
+
+    attributes_table do
+      row :id
+      row :user
+      row :email do |record|
+        record.user&.email
+      end
+      row :stripe_invoice_id
+      row :invoice_status
+      row :created_at
+      row :amount_due do |invoice|
+        total = invoice.total_amount
+        number_to_currency(total)
+      end
+      row :order do |invoice|
+        order = invoice.order
+      end
+    end
   end
 end
