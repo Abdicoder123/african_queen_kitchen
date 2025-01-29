@@ -33,6 +33,47 @@ ActiveAdmin.register Order do
     redirect_to admin_order_path(order) # Redirect to the order's show page
   end
 
+  member_action :decline_order, method: :patch do
+    order = Order.find(params[:id])
+    invoice = order.invoice
+
+    if invoice
+      stripe_invoice_id = invoice.stripe_invoice_id
+
+      begin
+      stripe_invoice = Stripe::Invoice.retrieve(stripe_invoice_id)
+
+      case stripe_invoice.status
+      when "draft"
+        # If invoice is still in draft, delete it (MOST LIKELY invoice is still in draft)
+        Stripe::Invoice.delete(stripe_invoice_id)
+        invoice.update(invoice_status: "Deleted")
+      when "open"
+        # If invoice is open, void it (after a customer is confirmed but needs to be cancelled)
+        Stripe::Invoice.void_invoice(stripe_invoice_id)
+        invoice.update(invoice_status: "Cancelled")
+      when "finalized"
+        # If invoice is finalized, mark it uncollectible (if a payment has already gone through but needs to be cancelled)
+        Stripe::Invoice.mark_uncollectible(stripe_invoice_id)
+        invoice.update(invoice_status: "Cancelled")
+      else
+        flash[:alert] = "Invoice cannot be cancelled in its current state: #{stripe_invoice.status}."
+        redirect_to admin_order_path(order) and return
+      end
+
+      order.update(status: "Cancelled")
+
+      flash[:notice] = "Order and invoice have been successfully cancelled."
+    rescue Stripe::StripeError => e
+      flash[:alert] = "Failed to cancel invoice: #{e.message}"
+    end
+    else
+    flash[:alert] = "Invoice not found for this order."
+    end
+
+    redirect_to admin_order_path(order)
+  end
+
 
   index do
     panel "Order Overview" do
@@ -44,7 +85,7 @@ ActiveAdmin.register Order do
       end
     end
 
-    selectable_column
+    column :id
     column :user
     column :delivery_date
     column :status
@@ -63,6 +104,12 @@ ActiveAdmin.register Order do
       if order.status == "Pending" && order.invoice.present? # Ensure the order has an invoice
         # Add a button to accept the order and update the invoice
         link_to "Accept Order", update_invoice_admin_order_path(order), method: :patch
+      end
+    end
+
+    column do |order|
+      if ![ "Confirmed", "Cancelled", "Order Creation", "Completed" ].include?(order.status) && order.invoice.present?
+        link_to "Decline Order", decline_order_admin_order_path(order), method: :patch, data: { confirm: "Are you sure you want to decline this order?" }
       end
     end
   end
@@ -137,6 +184,11 @@ ActiveAdmin.register Order do
         row :updated_at
       end
     end
+
+      if order.status == "Cancelled"
+        flash[:notice] = "This order has been cancelled. Do not change the order status."
+      end
+
     panel "Order Status Note" do
       div do
         h3 "Manually changing the status of an order is helpful when cancelling the order but be mindful for other statuses."
@@ -150,7 +202,7 @@ ActiveAdmin.register Order do
       end
     end
     f.inputs "Update Order Status" do
-      f.input :status, as: :select, collection: %w[pending confirmed shipped completed canceled], include_blank: false
+      f.input :status, as: :select, collection: %w[Pending Confirmed Shipped Completed Canceled], include_blank: true
     end
     f.actions
   end
