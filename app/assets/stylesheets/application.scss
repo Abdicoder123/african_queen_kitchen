@@ -21,9 +21,24 @@
  @import "about";
  @import "footer";
  @import "navbar";
-@import "devise";
+ @import "devise";
 
 
  .container {
     text-align: center !important;
+ }
+
+ p {
+   text-align: center;
+   color: #555;
+   margin-bottom: 40px;
+   font-size: 1.1rem;
+ }
+
+ h3 {
+   text-align: center;
+   color: #B8860B;
+   margin: 40px 0;
+   font-weight: bold;
+   font-size: 1.5 rem;
  }
