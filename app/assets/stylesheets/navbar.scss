@@ -1,0 +1,44 @@
+/* Navbar Styling */
+.navbar {
+    background-color: #343a40; /* Bootstrap dark background */
+    border-bottom: 3px solid #ffd700; /* Gold border for branding */
+    color: #f8f9fa; /* Light text for visibility */
+    padding: 0.5rem 1rem; /* Adjust spacing */
+  
+    .navbar-brand {
+      color: #ffd700; /* Gold branding text */
+      font-weight: bold;
+      text-transform: uppercase; /* Consistent style with footer */
+      text-decoration: none;
+      transition: color 0.3s ease; /* Smooth hover effect */
+    }
+  
+    .navbar-brand:hover {
+      color: #ffa500; /* Slightly brighter gold on hover */
+    }
+  
+    .nav-link {
+      color: #f8f9fa; /* Light text for links */
+      text-decoration: none;
+      font-size: 1rem;
+      transition: color 0.3s ease; /* Smooth hover effect */
+    }
+  
+    .nav-link:hover {
+      color: #ffd700; /* Gold hover effect */
+      text-decoration: underline;
+    }
+  
+    .nav-item {
+      margin-right: 1rem; /* Space between nav items */
+    }
+  
+    .navbar-toggler {
+      border-color: #ffd700; /* Gold border for toggle button */
+    }
+  
+    .navbar-toggler-icon {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3E%3Cpath stroke='rgba(255, 215, 0, 1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+    }
+  }
+  

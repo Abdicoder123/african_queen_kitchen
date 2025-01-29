@@ -1,34 +1,68 @@
+<% content_for :javascript do %>
+  <script type="module">
+    import "order";
+  </script>
+<% end %>
+
 <h1>Order Continuation</h1> <hr>
-<h3> Manage your Dishes!</h3>
+<!-- Secondary navbar-->
+<div class="nav-scroller py-1 mb-2">
+  <div class="nav d-flex justify-content-between py-1">
+    <% @menus.each do |menu| %>
+      <a class="p-2 text-muted" href='#<%= menu.title.parameterize %>'><%= menu.title %></a>
+    <% end %>
+    <a class="p-2 text-muted" href='#submit'>Submit Order</a>
+  </div>
+</div> <hr>
 
 <div class="container mt-4">
   <div class="card shadow-lg">
     <div class="card-body">
       <div class="row">
-        <!-- Dishes Column -->
-        <div class="col-md-6">
-          <h3>Dishes in this Order</h3>
+        
+      <!-- Dishes Column -->
+        <div class="col">
+          <h2 class="order-header">Dishes in this Order:</h2>
           <!-- Render dishes -->
           <%= render 'dish' %>
         </div>
-        
-      
-        <!-- Order Dishes Form Column -->
-        <div class="col-md-6">
-          <% if @order.status == 'Order Creation' %>
-            <%= render 'order_dishes/form', order: @order %>
-          <% end %>
-        </div>
+  
+
       </div>
     </div>
   </div>
 </div>
 
+<br>
+<br>
+<br>
 
+<!-- Menus -->
+<div class="card shadow-lg p-5">
+  <h2 class="order-header">Click to add dishes to your order!</h2> <hr>
+  <%= render 'menus/menu' %>
 
-<hr>
-<h3>Edit your Order Details</h3>
+   <!-- Pop-Up Modal -->
+  <div id="popupModal">
+    <div id="modalContent">
+      <%= render 'order_dishes/form', order: @order %>
+      <button id="closeModal" >
+        ✖
+      </button>
+    </div>
+  </div>
+
+</div> 
+
+<br>
+<br>
+<br>
 
 <!-- Renders order details -->
-<%= render 'form', button_text: "Submit Order" %>
+<section id="submit">
+  <div class="card shadow-lg p-5">
+    <h2 class="order-header">Finalize and Submit Order</h2>
+    <%= render 'form', button_text: "Submit Order" %>
+  </div>
+</section>
 
