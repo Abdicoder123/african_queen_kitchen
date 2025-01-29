@@ -4,8 +4,7 @@ class ReviewsController < ApplicationController
 
     before_action :set_review, only: [ :show, :edit, :update, :destroy ]
 
-    # Ensure that users can only edit or delete their own reviews
-    before_action :authorize_review, only: [ :edit, :update, :destroy ]
+    before_action :check_admin, only: [:destroy]
 
     def index
       @reviews = Review.all
