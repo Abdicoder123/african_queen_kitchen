@@ -1,19 +1,19 @@
-<h1 class="text-center my-4">African Queen Kitchen Reviews</h1>
+<h1 class="text-center-my-4">African Queen Kitchen Reviews</h1>
 
 <div class="container">
   <div class="row">
     <% @reviews.each do |review| %>
-      <div class="col-md-4 mb-4">
-        <div class="card shadow-sm">
-          <div class="card-body">
-            <h5 class="card-title"><%= review.user.name %></h5>
-            <h6 class="card-subtitle mb-2 text-muted">Rating: <%= review.rating %> / 5</h6>
-            <p class="card-text"><strong>Comment:</strong> <%= review.comment %></p>
-
-            <% if user_signed_in? %>
-              <%= link_to 'Show Details', review_path(review), class: 'btn btn-info btn-sm' %>
-            <% end %>
-          </div>
+      <div class="col-md-4 mb-4" id="r1">
+        <!-- Custom Review Card -->
+        <div class="review-thumbnail custom-card">
+          <p class="review-text">
+            “<%= review.comment %>”
+            <br><br>
+            <strong><%= review.user.name %></strong>
+          </p>
+          <p class="rating">
+            Rating: <%= review.rating %> / 5
+          </p>
         </div>
       </div>
     <% end %>

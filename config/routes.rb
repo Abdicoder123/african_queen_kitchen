@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
   resources :orders do
-    resources :order_dishes
+    resources :order_dishes, only: [ :create, :destroy ]
   end
   resources :payments
   resources :invoices
