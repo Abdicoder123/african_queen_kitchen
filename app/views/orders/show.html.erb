@@ -25,7 +25,7 @@
         </div>
     <% elsif @invoice.invoice_status == "draft" %>
         <div class="alert alert-warning mt-4 text-center" role="alert">
-            Thanks for ordering! Please check back in "My Orders" tab to see if your order has been accepted. Approval usually takes around 2 to 3 business days
+            Thanks for ordering! An invoice will be create and sent via email from Stripe when the order has been approved. Please check back in "My Orders" tab to manually check if your order has been accepted. Approval usually takes around 2 to 3 business days
         </div>
     <% else  %>
         <div class="alert alert-warning mt-4 text-center" role="alert">
