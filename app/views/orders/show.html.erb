@@ -1,5 +1,21 @@
 <div class="container mt-5">
     <h1 class="text-center mb-4">Order Page</h1> <hr>
+
+    <!-- Renders Alert -->
+    <% if @invoice.invoice_status == "Paid" %>
+        <div class="alert alert-success mt-4 text-center" role="alert">
+        This order has been completed!
+        </div>
+    <% elsif @invoice.invoice_status == "draft" %>
+        <div class="alert alert-warning mt-4 text-center" role="alert">
+            Thanks for ordering! An invoice will be create and sent via email from Stripe when the order has been approved. Please check back in "My Orders" tab to manually check if your order has been accepted. Approval usually takes around 2 to 3 business days
+        </div>
+    <% elsif @invoice.invoice_status == "Deleted"  %>
+        <div class="alert alert-warning mt-4 text-center" role="alert">
+            This order has been cancelled. Thank you for your understanding.
+        </div>
+  <% end %>
+
     <!-- Renders order details -->
     <div class="card shadow-sm mb-4">
         <div class="card-body">
@@ -19,19 +35,9 @@
         <div class="text-center mt-4">
         <%= link_to "Pay Now", pay_path(@order), class: "btn btn-success btn-lg",  target: "_blank" %>
         </div>
-    <% elsif @invoice.invoice_status == "Paid" %>
-        <div class="alert alert-success mt-4 text-center" role="alert">
-        This order has been completed!
-        </div>
-    <% elsif @invoice.invoice_status == "draft" %>
-        <div class="alert alert-warning mt-4 text-center" role="alert">
-            Thanks for ordering! An invoice will be create and sent via email from Stripe when the order has been approved. Please check back in "My Orders" tab to manually check if your order has been accepted. Approval usually takes around 2 to 3 business days
-        </div>
-    <% else  %>
-        <div class="alert alert-warning mt-4 text-center" role="alert">
-            This order has been cancelled. Thank you for your understanding.
-        </div>
-  <% end %>
+    <% end %>
+
+
  
   
 </div>
