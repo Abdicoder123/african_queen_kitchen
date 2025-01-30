@@ -9,6 +9,7 @@ class User < ApplicationRecord
   after_create :create_stripe_customer
   after_save :create_stripe_customer
   before_destroy :delete_stripe_customer
+  before_update :update_stripe_customer
 
   has_many :orders, dependent: :destroy
   has_many :invoices, dependent: :destroy
@@ -40,3 +41,16 @@ class User < ApplicationRecord
     end
   end
 end
+
+def update_stripe_customer
+  return unless stripe_customer_id.present? # Ensure user has a Stripe ID
+
+  customer = Stripe::Customer.update(
+    stripe_customer_id,
+    {
+      email: email,
+      name: name,
+      phone: phone_number
+    }
+  )
+end 
