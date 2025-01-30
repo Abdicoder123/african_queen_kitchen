@@ -2,13 +2,20 @@ ActiveAdmin.register Menu do
   permit_params :title, :description, :category, :active, :special_notes, images: []
 
   index do
+    panel "Menu Overview" do
+      div do
+        h3 "This is where all of your active menus are!"
+        h3 "Each of your dishes belong to a menu."
+        h3 "You can view, edit and delete your menus as you see fit by clicking the respective links."
+        h3 "Upon clicking edit, you can toggle whether or not a menu is active as well as add a description."
+        h3 "In the upper right corner, you can click 'New Menu' to create a new menu you want to add."
+      end
+    end
+
     selectable_column
     id_column
     column :title
-    column :description
-    column :category
     column :active
-    column :special_notes
     column :created_at
     column :updated_at
     column "Images" do |menu|
