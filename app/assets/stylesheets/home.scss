@@ -1,7 +1,7 @@
 /* Buttons */
 .btn-primary {
   background-color: var(--secondary-color);
-  color: #4b0082;
+  color:#2E1030;
   border: none;
   font-weight: bold;
   margin-top: 10px;
@@ -14,7 +14,7 @@
 
 /* Brand Colors */
 :root {
-  --primary-color: #4b0082; /* Royal Purple */
+  --primary-color:#2E1030; /* Royal Purple */
   --secondary-color: #ffd700; /* Gold */
 }
 
@@ -24,11 +24,12 @@ h1 {
   color: var(--primary-color);
   margin-top: 20px;
   font-weight: bold;
-  color: #B8860B;
+  color: #2E1030;
 }
 
 p {
   text-align: center;
+  color: var(--primary-color);
   margin: 10px 0;
 }
 
