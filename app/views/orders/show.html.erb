@@ -1,5 +1,5 @@
 <div class="container mt-5">
-    <h1 class="text-center mb-4">Order Page</h1> <hr>
+    <h1 class="text-center mb-4">Order Page</h1>
 
     <!-- Renders Alert -->
     <% if @invoice.invoice_status == "Paid" %>
@@ -12,9 +12,9 @@
         </div>
     <% elsif @invoice.invoice_status == "Deleted"  %>
         <div class="alert alert-warning mt-4 text-center" role="alert">
-            This order has been cancelled. Thank you for your understanding.
+            This order has been cancelled, thank you for your understanding. For more information contact: africanqueenkitchen@gmail.com
         </div>
-  <% end %>
+  <% end %> <hr>
 
     <!-- Renders order details -->
     <div class="card shadow-sm mb-4">
