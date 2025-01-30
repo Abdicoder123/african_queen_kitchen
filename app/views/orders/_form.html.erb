@@ -3,7 +3,7 @@
   <%= form_with(model: @order, local: true, class: "needs-validation") do |form| %>
     <div class="mb-3">
       <%= form.label :delivery_date, "Delivery Date", class: "form-label" %>
-      <%= form.date_field :delivery_date, class: "form-control" %>
+      <%= form.date_field :delivery_date, min: Date.today.to_s, class: "form-control" %>
     </div>
 
     <div class="mb-3">
