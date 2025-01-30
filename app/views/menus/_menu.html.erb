@@ -29,7 +29,7 @@
               <% end %>
 
             <h3 class="menu-card-title"><%= dish.title %></h3>
-            <p>$<%= dish.price %></p>
+            <p><%= sprintf('$%.2f', dish.price) %></p>
             <p class="menu-card-description"><%= dish.description %></p>
             <% if dish.customizable.present? %>
               <p class="menu-card-description"><%= dish.customizable %></p>
