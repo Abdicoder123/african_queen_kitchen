@@ -17,7 +17,7 @@
 
     <% if @invoice.invoice_status == "Payment Pending" && @order.status != "canceled" %>
         <div class="text-center mt-4">
-        <%= link_to "Pay Now", pay_path(@order), class: "btn btn-success btn-lg" %>
+        <%= link_to "Pay Now", pay_path(@order), target: "_blank", class: "btn btn-success btn-lg" %>
         </div>
     <% elsif @invoice.invoice_status == "Paid" %>
         <div class="alert alert-success mt-4 text-center" role="alert">
