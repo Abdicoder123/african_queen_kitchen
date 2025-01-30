@@ -14,7 +14,7 @@ and the total price (price of dish * quantity) -->
         </div>
 
         <div>
-          <span class="badge bg-primary"><strong>Total Cost:</strong> <%= order_dish.price %></span>
+          <span class="badge bg-primary"><strong>Total Cost:</strong> <%= number_to_currency(order_dish.price) %></span>
         </div>
 
         <div>
