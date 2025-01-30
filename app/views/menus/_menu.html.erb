@@ -29,11 +29,7 @@
               <% end %>
 
             <h3 class="menu-card-title"><%= dish.title %></h3>
-<<<<<<< HEAD
             <p><%= number_to_currency(dish.price) %></p>
-=======
-            <p><%= sprintf('$%.2f', dish.price) %></p>
->>>>>>> main
             <p class="menu-card-description"><%= dish.description %></p>
             <% if dish.customizable.present? %>
               <p class="menu-card-description"><%= dish.customizable %></p>
