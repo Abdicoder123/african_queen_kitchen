@@ -1,17 +1,10 @@
-/* Global Styles */
-body {
-  background-color: #F5DFBB !important; // Deep purple background to match branding
-  font-family: 'Poppins', sans-serif; // Sets a clean and modern font
-  text-align: center; // Ensures all text is centered
-}
-
 /* Color Styles */
 .text-gold {
-  color: #B8860B !important; // Darker gold color for better visibility
+  color: #2E1030 !important; // Darker gold color for better visibility
 }
 
 .text-purple {
-  color: #D4AF37; // Alternative gold shade for subtitle
+  color:#2E1030; // Alternative gold shade for subtitle
 }
 
 .text-light {
@@ -20,7 +13,7 @@ body {
 }
 
 .text-dark {
-  color: #2E2E2E !important; // Dark color for improved readability in paragraphs
+  color: #2E1030 !important; // Dark color for improved readability in paragraphs
   font-size: 1.2rem;
 }
 
@@ -28,7 +21,7 @@ body {
 .page-title {
   font-size: 2.5rem; // Makes the main title prominent
   font-weight: bold;
-  color: #B8860B !important; // Darker gold for better contrast
+  color: #2E1030; // Darker gold for better contrast
 }
 
 /* Section Titles */
@@ -39,7 +32,7 @@ body {
   padding-bottom: 10px;
   width: 100%;
   border-bottom: none !important; // Removes unwanted short border
-  color: #B8860B !important; // Darker gold for improved visibility
+  color: #2E1030; // Darker gold for improved visibility
 }
 
 /* Custom Separator for Section Titles */
@@ -48,7 +41,7 @@ h2::after {
   display: block;
   width: 80px;
   height: 4px;
-  background-color: #B8860B; // Darker gold separator for consistency
+  background-color:#FFD700; // Darker gold separator for consistency
   margin: 10px auto 0 auto; // Centers the separator with spacing
 }
 
@@ -80,6 +73,6 @@ h2::after {
 .mission-section p,
 .history-section p,
 .founder-section p {
-  color: #2E2E2E !important; // Dark color for better contrast and readability
+  color:#2E1030 !important; // Dark color for better contrast and readability
   margin-bottom: 10px; // Ensures consistency in paragraph spacing
 }
