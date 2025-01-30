@@ -2,30 +2,38 @@
 and the total price (price of dish * quantity) -->
 
 <div class="container mt-4">
-  <ul class="list-group">
+  <div class="row">
     <% @order_dishes.each do |order_dish| %>
-      <li class="list-group-item d-flex justify-content-between align-items-center">
-        <div>
-          <strong>Dish Name:</strong> <%= order_dish.dish.title %>
-        </div>
+      <div class="col-md-4">
+        <div class="card card-dish">
+          <div class="dish-images">
+            <% if order_dish.dish.image.attached? %>
+            <%= image_tag order_dish.dish.image, class: "order-dish-image" %>
+            <% end %>
+          </div>
 
-        <div>
-          <strong>Quantity:</strong> <%= order_dish.quantity %>
-        </div>
+          <div>
+            <strong>Dish Name:</strong> <%= order_dish.dish.title %>
+          </div>
 
-        <div>
-          <span class="badge bg-primary"><strong>Total Cost:</strong> <%= number_to_currency(order_dish.price) %></span>
-        </div>
+          <div>
+            <strong>Quantity:</strong> <%= order_dish.quantity %>
+          </div>
 
-        <div>
-          <!-- Delete Button -->
-          <% if @order.status == "Order Creation" %>
-            <%= button_to "Delete", [order_dish.order, order_dish], method: :delete, data: { confirm: "Are you sure you want to delete this dish?" } %>
-          <% end %>
+          <div>
+            <span class="badge bg-primary"><strong>Total Cost:</strong> <%= number_to_currency(order_dish.price) %></span>
+          </div>
+
+          <div>
+            <!-- Delete Button -->
+            <% if @order.status == "Order Creation" %>
+              <%= button_to "Delete", [order_dish.order, order_dish], method: :delete, data: { confirm: "Are you sure you want to delete this dish?" }, class: "mt-4" %>
+            <% end %>
+          </div>
         </div>
-      </li>
+      </div>
     <% end %>
-  </ul>
+  </div>
 </div>
 
 
